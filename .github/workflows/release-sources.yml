@@ -242,6 +242,7 @@ jobs:
     uses: ./.github/workflows/neozip-release.yml
     with:
       source-repository: ${{ inputs.source-repository || '' }}
+      source-ref: ${{ inputs.source-ref || github.ref }}
     permissions:
       contents: read
     secrets: inherit

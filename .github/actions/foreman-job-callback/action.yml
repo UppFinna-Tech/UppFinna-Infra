@@ -28,7 +28,7 @@ inputs:
     description: Display name of the current job.
     required: true
   job_id:
-    description: GitHub Actions job ID (${{ github.job }}).
+    description: GitHub Actions job ID.
     required: false
     default: ""
   status:

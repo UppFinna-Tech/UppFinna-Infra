@@ -1068,7 +1068,7 @@ jobs:
   report-foreman20:
     name: "Report: Foreman 2.0"
     needs: [callback-start, foreman20]
-    if: always() && needs.callback-start.outputs.pipeline_id != '' && needs.foreman.result != 'skipped'
+    if: always() && needs.callback-start.outputs.pipeline_id != '' && needs.foreman20.result != 'skipped'
     runs-on: ubuntu-latest
     permissions: {}
     steps:

@@ -10,6 +10,27 @@ runs:
   using: composite
 
   steps:
+    - name: Add GnuPG repository
+      shell: bash
+      run: |
+        sudo install -d -m 0755 /usr/share/keyrings
+
+        sudo gpg --no-default-keyring \
+          --keyring /usr/share/keyrings/gnupg-keyring.gpg \
+          --fetch-keys https://repos.gnupg.org/deb/gnupg/noble/gnupg-signing-key.gpg
+
+        sudo chmod a+r /usr/share/keyrings/gnupg-keyring.gpg
+
+        cat <<'EOF' | sudo tee /etc/apt/sources.list.d/gnupg.sources >/dev/null
+        Types: deb
+        URIs: https://repos.gnupg.org/deb/gnupg/noble/
+        Suites: noble
+        Components: main
+        Signed-By: /usr/share/keyrings/gnupg-keyring.gpg
+        EOF
+
+        sudo apt-get -y update
+
     - name: Install host dependencies
       shell: bash
       run: |
@@ -19,7 +40,7 @@ runs:
           ninja-build extra-cmake-modules pkg-config scdoc \
           gamemode-dev libarchive-dev libqrencode-dev \
           libxcb-cursor-dev libtomlplusplus-dev libvulkan-dev \
-          libqgpgmeqt6-dev libgpgmepp-dev
+          libgpgme-dev libgpgmepp-dev libqgpgmeqt6-dev
 
     - name: Setup AppImage tooling
       shell: bash

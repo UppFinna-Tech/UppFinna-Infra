@@ -10,42 +10,24 @@ runs:
   using: composite
 
   steps:
-    - name: Add GnuPG repository
-      shell: bash
-      run: |
-        sudo apt-get -y update
-        sudo apt-get -y install curl ca-certificates gnupg
-
-        sudo install -d -m 0755 /usr/share/keyrings
-
-        curl -fsSL \
-          https://repos.gnupg.org/deb/gnupg/noble/gnupg-signing-key.gpg \
-          | gpg --dearmor \
-          | sudo tee /usr/share/keyrings/gnupg-keyring.gpg >/dev/null
-
-        sudo chmod a+r /usr/share/keyrings/gnupg-keyring.gpg
-
-        cat <<'EOF' | sudo tee /etc/apt/sources.list.d/gnupg.sources >/dev/null
-        Types: deb
-        URIs: https://repos.gnupg.org/deb/gnupg/noble/
-        Suites: noble
-        Components: main
-        Signed-By: /usr/share/keyrings/gnupg-keyring.gpg
-        EOF
-
-        sudo add-apt-repository -y ppa:kubuntu-ppa/backports
-        sudo apt-get -y update
-
     - name: Install host dependencies
       shell: bash
       run: |
+        # Qt6 itself is installed in the parent action via
+        # `jurplel/install-qt-action` (aqt). GPGME / GpgME++ / QGpgME
+        # come from a source build later in the parent action — we
+        # cannot rely on Ubuntu noble (gpgme 1.18 + no Qt6 bindings)
+        # or Kubuntu Backports (libqgpgmeqt6-dev pins to gpgme 1.24,
+        # incompatible with upstream 2.0). Here we only stage the
+        # toolchain + library deps the source build will need.
         sudo apt-get -y update
         sudo apt-get -y install \
           dpkg-dev \
           ninja-build extra-cmake-modules pkg-config scdoc \
           gamemode-dev libarchive-dev libqrencode-dev \
           libxcb-cursor-dev libtomlplusplus-dev libvulkan-dev \
-          libgpgme-dev libgpgmepp-dev libqgpgmeqt6-dev
+          libgpg-error-dev libassuan-dev libksba-dev \
+          libnpth0-dev libbotan-2-dev autoconf automake libtool gettext
 
     - name: Setup AppImage tooling
       shell: bash

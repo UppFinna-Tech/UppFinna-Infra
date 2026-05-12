@@ -85,3 +85,58 @@ runs:
         version: ${{ inputs.qt-version }}
         modules: qtimageformats qtnetworkauth qt5compat
         cache: ${{ inputs.build-type == 'Debug' }}
+
+    # ── GPGME + Qt6 binding from source (Linux only) ───────────────────
+    # MMCO's plugin signing needs the Qt6 QGpgME bindings against
+    # GPGME 2.x. Neither Ubuntu noble main (gpgme 1.18, no Qt6 binding)
+    # nor Kubuntu Backports (gpgme 1.24 + libqgpgmeqt6-dev 1.24, pins
+    # to the older C++ ABI) provide a usable combination, so we build
+    # GPGME from the upstream tarball against the aqt-managed Qt6
+    # toolkit. Result lands in /usr/local; CMake picks it up via
+    # `Gpgmepp` / `QGpgmeQt6` packages with no extra prefix hints.
+    - name: Build GPGME + QGpgME from source
+      if: ${{ runner.os == 'Linux' && inputs.msystem == '' }}
+      shell: bash
+      env:
+        GPGME_VERSION: "2.0.0"
+      run: |
+        set -euo pipefail
+
+        qmake6_bin=""
+        for candidate in "$QT_ROOT_DIR/bin/qmake6" "$Qt6_DIR/../../../bin/qmake6"; do
+          if [[ -x "$candidate" ]]; then
+            qmake6_bin="$candidate"
+            break
+          fi
+        done
+        if [[ -z "$qmake6_bin" ]]; then
+          qmake6_bin="$(command -v qmake6 || true)"
+        fi
+        if [[ -z "$qmake6_bin" ]]; then
+          echo "::error::Could not locate qmake6 from the aqt-installed Qt."
+          exit 1
+        fi
+        echo "Using qmake6 at: $qmake6_bin"
+
+        build_root="$(mktemp -d)"
+        cd "$build_root"
+
+        curl -fsSLO \
+          "https://www.gnupg.org/ftp/gcrypt/gpgme/gpgme-${GPGME_VERSION}.tar.bz2"
+        tar xjf "gpgme-${GPGME_VERSION}.tar.bz2"
+        cd "gpgme-${GPGME_VERSION}"
+
+        export PATH="$(dirname "$qmake6_bin"):$PATH"
+        ./configure \
+          --prefix=/usr/local \
+          --enable-languages=cpp,qt6 \
+          --disable-gpg-test \
+          --disable-gpgsm-test \
+          --disable-g13-test
+
+        make -j"$(nproc)"
+        sudo make install
+        sudo ldconfig
+
+        echo "CMAKE_PREFIX_PATH=/usr/local${CMAKE_PREFIX_PATH:+:$CMAKE_PREFIX_PATH}" >> "$GITHUB_ENV"
+        echo "PKG_CONFIG_PATH=/usr/local/lib/pkgconfig${PKG_CONFIG_PATH:+:$PKG_CONFIG_PATH}" >> "$GITHUB_ENV"

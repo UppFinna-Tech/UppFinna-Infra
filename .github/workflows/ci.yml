@@ -87,6 +87,28 @@ on:
         description: "Optional Foreman callback bearer token"
         type: string
         default: ""
+      # ── Foreman gate-plan injection (2026-05-15) ───────────────────
+      # Foreman computes the CI gate plan server-side at dispatch time
+      # and forwards it here so reusable workflows can route around
+      # quarantines / cost-aware downgrades without a second round-trip.
+      # Empty when Foreman is not in the loop (manual workflow_dispatch
+      # by a maintainer, fork PR without secrets).
+      foreman-plan:
+        description: "Compact JSON CI gate plan from Foreman."
+        type: string
+        default: ""
+      foreman-pipeline-id:
+        description: "Foreman pipeline UUID for live log + job status streaming."
+        type: string
+        default: ""
+      foreman-callback-url:
+        description: "Per-pipeline Foreman callback base URL."
+        type: string
+        default: ""
+      foreman-callback-token:
+        description: "Per-pipeline Foreman callback bearer token."
+        type: string
+        default: ""
 
 permissions:
   contents: read

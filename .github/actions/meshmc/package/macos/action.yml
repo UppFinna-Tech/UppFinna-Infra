@@ -124,8 +124,73 @@ runs:
             _layout_bad=1
           fi
         done < <(find "MeshMC.app/Contents/MacOS" -mindepth 1 -print0)
+
+        # Contents/PlugIns/ layout check.
+        #
+        # Apple's strict-signing pass also walks PlugIns/ and treats
+        # every file it finds there as nested code that must be
+        # individually signable. JSON / TXT / template files dropped
+        # alongside a .mmco produce the exact same
+        #   "code object is not signed at all
+        #    In subcomponent: .../PlugIns/mmcmodules/Foo/rules/x.json"
+        # failure mode we saw with Contents/MacOS/jars. Plugin data
+        # belongs under Contents/Resources/MMCOPluginData/<Plugin>/
+        # (see MMCO_PLUGIN_DATA_DEST_DIR in the top-level CMakeLists).
+        # Only Mach-O files (.mmco) and well-formed Apple bundles
+        # (*.bundle / *.framework) are allowed under PlugIns/.
+        if [ -d "MeshMC.app/Contents/PlugIns" ]; then
+          echo "Validating Contents/PlugIns/ layout"
+          while IFS= read -r -d '' _entry; do
+            # We don't descend into well-formed Apple bundles —
+            # those are signed as a unit and their internals are
+            # codesign's problem, not ours.
+            case "$_entry" in
+              *.framework|*.bundle|*.app)
+                continue
+                ;;
+            esac
+            # Inside *.framework / *.bundle / *.app the find walk
+            # would still report their contents; skip anything
+            # whose path contains one of those segments.
+            if echo "$_entry" \
+                 | grep -qE '\.(framework|bundle|app)(/|$)'; then
+              continue
+            fi
+            if [ -d "$_entry" ]; then
+              # Subdirectory under PlugIns/ that isn't itself a
+              # bundle. The mmcmodules/ container is the only one
+              # we expect (it groups .mmco loadable bundles).
+              case "${_entry#MeshMC.app/Contents/PlugIns/}" in
+                mmcmodules)
+                  continue
+                  ;;
+              esac
+              # Anything else (e.g. mmcmodules/ErrorOracle/) means
+              # a plugin shipped a data directory next to its .mmco.
+              # That is exactly what trips codesign.
+              echo "::error::Plugin-data directory under Contents/PlugIns/: $_entry"
+              echo "          Install plugin data files to MMCO_PLUGIN_DATA_DEST_DIR"
+              echo "          (Contents/Resources/MMCOPluginData/<PluginName>/...) instead."
+              _layout_bad=1
+              continue
+            fi
+            if [ ! -f "$_entry" ]; then
+              continue
+            fi
+            # Files at this depth must be Mach-O (.mmco files are
+            # Mach-O loadable bundles). Anything else — JSON, TXT,
+            # README — is unsigned data and will trip codesign.
+            if ! file -b "$_entry" | grep -qE 'Mach-O|universal binary'; then
+              echo "::error::Non-Mach-O file under Contents/PlugIns/: $_entry"
+              echo "          file: $(file -b "$_entry")"
+              echo "          Move it to Contents/Resources/MMCOPluginData/<Plugin>/."
+              _layout_bad=1
+            fi
+          done < <(find "MeshMC.app/Contents/PlugIns" -mindepth 1 -print0)
+        fi
+
         if [ "$_layout_bad" != "0" ]; then
-          echo "::error::Contents/MacOS/ layout check failed; aborting before codesign."
+          echo "::error::Bundle layout check failed; aborting before codesign."
           exit 1
         fi
 

@@ -163,7 +163,7 @@ jobs:
   meshmc:
     name: "MeshMC Release"
     needs: resolve
-    if: needs.resolve.outputs.project == 'meshmc'
+    if: needs.resolve.outputs.project == 'meshmc' && inputs.beta_source_only != true
     uses: ./.github/workflows/meshmc-release.yml
     with:
       source-ref: ${{ inputs.source-ref || github.ref }}

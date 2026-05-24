@@ -85,13 +85,22 @@ jobs:
             echo "Monorepo mode — neozip already in workspace"
             exit 0
           fi
-          # Public anonymous URL works without a token; when a token is
-          # set we keep the same URL and inject it as an http header so
-          # it never appears in the recorded remote.
-          url="${GITLAB_BASE}/neozip.git"
+
+          # Disable interactive credential helpers (e.g. GCM on Windows)
+          # so a 401 never escalates to an OAuth prompt and fails the job.
+          export GIT_TERMINAL_PROMPT=0
+          git config --global credential.helper ""
+
+          # When a token is set we embed it as basic-auth in the URL during
+          # clone (works across GitLab/Gitea/cgit), then strip it from the
+          # recorded remote so the token never lands in `.git/config` or
+          # `git log` output.
+          url="${GITLAB_BASE}/projects/neozip.git"
           if [[ -n "$SOURCE_AUTH_TOKEN" ]]; then
-            git -c "http.extraHeader=PRIVATE-TOKEN: ${SOURCE_AUTH_TOKEN}" \
-              clone --depth 1 "$url" "${GITHUB_WORKSPACE}/neozip"
+            host_path="${url#https://}"
+            auth_url="https://${SOURCE_AUTH_USERNAME}:${SOURCE_AUTH_TOKEN}@${host_path}"
+            git clone --depth 1 "$auth_url" "${GITHUB_WORKSPACE}/neozip"
+            git -C "${GITHUB_WORKSPACE}/neozip" remote set-url origin "$url"
           else
             git clone --depth 1 "$url" "${GITHUB_WORKSPACE}/neozip"
           fi

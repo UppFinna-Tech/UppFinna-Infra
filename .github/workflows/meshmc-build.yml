@@ -190,7 +190,7 @@ jobs:
           # GitLab/Gitea/cgit), then strip it from the recorded remote so
           # the token never lands in `.git/config` or `git log` output.
           for dep in "${DEPS[@]}"; do
-            url="${GITLAB_BASE}/${dep}.git"
+            url="${GITLAB_BASE}/projects/${dep}.git"
             echo "::group::Cloning $dep"
             if [[ -n "$SOURCE_AUTH_TOKEN" ]]; then
               host_path="${url#https://}"
@@ -261,7 +261,7 @@ jobs:
           git config --global credential.helper ""
 
           for dep in "${DEPS[@]}"; do
-            url="${GITLAB_BASE}/${dep}.git"
+            url="${GITLAB_BASE}/projects/${dep}.git"
             echo "::group::Cloning $dep"
             if [[ -n "$SOURCE_AUTH_TOKEN" ]]; then
               host_path="${url#https://}"
@@ -334,7 +334,7 @@ jobs:
           git config --global credential.helper ""
 
           for dep in "${DEPS[@]}"; do
-            url="${GITLAB_BASE}/${dep}.git"
+            url="${GITLAB_BASE}/projects/${dep}.git"
             if [[ -n "$SOURCE_AUTH_TOKEN" ]]; then
               host_path="${url#https://}"
               auth_url="https://${SOURCE_AUTH_USERNAME}:${SOURCE_AUTH_TOKEN}@${host_path}"
@@ -395,7 +395,7 @@ jobs:
           git config --global credential.helper ""
 
           for dep in "${DEPS[@]}"; do
-            url="${GITLAB_BASE}/${dep}.git"
+            url="${GITLAB_BASE}/projects/${dep}.git"
             if [[ -n "$SOURCE_AUTH_TOKEN" ]]; then
               host_path="${url#https://}"
               auth_url="https://${SOURCE_AUTH_USERNAME}:${SOURCE_AUTH_TOKEN}@${host_path}"

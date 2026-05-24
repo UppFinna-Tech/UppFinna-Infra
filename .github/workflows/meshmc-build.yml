@@ -179,17 +179,24 @@ jobs:
                 ganalytics rainbow iconfix LocalPeer classparser katabasis
                 javacheck javalauncher)
 
-          # The Project-Tick GitLab projects are public, so the canonical
-          # anonymous URL works whether secrets are present or not. When
-          # PT_GITLAB_SOURCE_TOKEN *is* set we still use the same path —
-          # but pass the token via http.extraHeader so it never leaks
-          # into the recorded remote URL or `git log` output.
+          # Disable any interactive credential helper (e.g. GCM on Windows)
+          # so a 401 never escalates to an OAuth prompt and fails the job.
+          export GIT_TERMINAL_PROMPT=0
+          git config --global credential.helper ""
+
+          # The Project-Tick GitLab projects are public; the anonymous URL
+          # works whether the token is present or not. When the token is set
+          # we embed it as basic-auth in the URL during clone (works across
+          # GitLab/Gitea/cgit), then strip it from the recorded remote so
+          # the token never lands in `.git/config` or `git log` output.
           for dep in "${DEPS[@]}"; do
             url="${GITLAB_BASE}/${dep}.git"
             echo "::group::Cloning $dep"
             if [[ -n "$SOURCE_AUTH_TOKEN" ]]; then
-              git -c "http.extraHeader=PRIVATE-TOKEN: ${SOURCE_AUTH_TOKEN}" \
-                clone --depth 1 "$url" "${GITHUB_WORKSPACE}/${dep}"
+              host_path="${url#https://}"
+              auth_url="https://${SOURCE_AUTH_USERNAME}:${SOURCE_AUTH_TOKEN}@${host_path}"
+              git clone --depth 1 "$auth_url" "${GITHUB_WORKSPACE}/${dep}"
+              git -C "${GITHUB_WORKSPACE}/${dep}" remote set-url origin "$url"
             else
               git clone --depth 1 "$url" "${GITHUB_WORKSPACE}/${dep}"
             fi
@@ -249,15 +256,18 @@ jobs:
           DEPS=(neozip cmark tomlplusplus libnbtplusplus optional-bare xz-embedded
                 systeminfo ganalytics rainbow iconfix LocalPeer classparser katabasis
                 javacheck javalauncher)
-          # Project-Tick GitLab projects are public; same canonical URL
-          # whether SOURCE_AUTH_TOKEN is set or not. When set, the token
-          # is injected as an http header so it never lands in the remote.
+
+          export GIT_TERMINAL_PROMPT=0
+          git config --global credential.helper ""
+
           for dep in "${DEPS[@]}"; do
             url="${GITLAB_BASE}/${dep}.git"
             echo "::group::Cloning $dep"
             if [[ -n "$SOURCE_AUTH_TOKEN" ]]; then
-              git -c "http.extraHeader=PRIVATE-TOKEN: ${SOURCE_AUTH_TOKEN}" \
-                clone --depth 1 "$url" "${GITHUB_WORKSPACE}/${dep}"
+              host_path="${url#https://}"
+              auth_url="https://${SOURCE_AUTH_USERNAME}:${SOURCE_AUTH_TOKEN}@${host_path}"
+              git clone --depth 1 "$auth_url" "${GITHUB_WORKSPACE}/${dep}"
+              git -C "${GITHUB_WORKSPACE}/${dep}" remote set-url origin "$url"
             else
               git clone --depth 1 "$url" "${GITHUB_WORKSPACE}/${dep}"
             fi
@@ -319,11 +329,17 @@ jobs:
           if [[ -z "$SOURCE_REPOSITORY" ]]; then exit 0; fi
           DEPS=(neozip cmark libnbtplusplus optional-bare xz-embedded systeminfo
                 ganalytics rainbow iconfix LocalPeer classparser katabasis javacheck javalauncher)
+
+          export GIT_TERMINAL_PROMPT=0
+          git config --global credential.helper ""
+
           for dep in "${DEPS[@]}"; do
             url="${GITLAB_BASE}/${dep}.git"
             if [[ -n "$SOURCE_AUTH_TOKEN" ]]; then
-              git -c "http.extraHeader=PRIVATE-TOKEN: ${SOURCE_AUTH_TOKEN}" \
-                clone --depth 1 "$url" "${GITHUB_WORKSPACE}/${dep}"
+              host_path="${url#https://}"
+              auth_url="https://${SOURCE_AUTH_USERNAME}:${SOURCE_AUTH_TOKEN}@${host_path}"
+              git clone --depth 1 "$auth_url" "${GITHUB_WORKSPACE}/${dep}"
+              git -C "${GITHUB_WORKSPACE}/${dep}" remote set-url origin "$url"
             else
               git clone --depth 1 "$url" "${GITHUB_WORKSPACE}/${dep}"
             fi
@@ -374,11 +390,17 @@ jobs:
           DEPS=(neozip cmark tomlplusplus libnbtplusplus optional-bare xz-embedded
                 systeminfo ganalytics rainbow iconfix LocalPeer classparser katabasis
                 javacheck javalauncher)
+
+          export GIT_TERMINAL_PROMPT=0
+          git config --global credential.helper ""
+
           for dep in "${DEPS[@]}"; do
             url="${GITLAB_BASE}/${dep}.git"
             if [[ -n "$SOURCE_AUTH_TOKEN" ]]; then
-              git -c "http.extraHeader=PRIVATE-TOKEN: ${SOURCE_AUTH_TOKEN}" \
-                clone --depth 1 "$url" "${GITHUB_WORKSPACE}/${dep}"
+              host_path="${url#https://}"
+              auth_url="https://${SOURCE_AUTH_USERNAME}:${SOURCE_AUTH_TOKEN}@${host_path}"
+              git clone --depth 1 "$auth_url" "${GITHUB_WORKSPACE}/${dep}"
+              git -C "${GITHUB_WORKSPACE}/${dep}" remote set-url origin "$url"
             else
               git clone --depth 1 "$url" "${GITHUB_WORKSPACE}/${dep}"
             fi

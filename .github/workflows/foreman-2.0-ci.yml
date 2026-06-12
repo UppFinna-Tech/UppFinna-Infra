@@ -37,8 +37,8 @@ defaults:
     shell: bash
 
 env:
-  REGISTRY: registry.projecttick.net
-  IMAGE_NAME: registry.projecttick.net/foreman
+  REGISTRY: registry.projecttick.org
+  IMAGE_NAME: registry.projecttick.org/foreman
 
 jobs:
   rspec:

@@ -62,8 +62,16 @@ runs:
       shell: bash
       env:
         VERSION: ${{ inputs.version }}
+        ARTIFACTS_DIR: ${{ inputs.artifacts-dir }}
       run: |
         set -euo pipefail
+        # Binaries are downloaded as per-artifact subdirectories under the
+        # artifacts dir (e.g. release-downloads/MeshMC-Linux-Portable-.../),
+        # NOT in the composite action's cwd. Operate from there so the mv/zip
+        # globs actually match; otherwise every mv silently no-ops (|| true)
+        # and the staging step finds no flattened binary files.
+        cd "${ARTIFACTS_DIR:-${GITHUB_WORKSPACE:-$PWD}}"
+
         mv MeshMC-Linux-Portable*/MeshMC-portable.tar.gz "MeshMC-Linux-Portable-${VERSION}.tar.gz" 2>/dev/null || true
         mv MeshMC-Linux-aarch64-Portable*/MeshMC-portable.tar.gz "MeshMC-Linux-aarch64-Portable-${VERSION}.tar.gz" 2>/dev/null || true
         mv MeshMC-*.AppImage/MeshMC-*-x86_64.AppImage MeshMC-Linux-x86_64.AppImage 2>/dev/null || true

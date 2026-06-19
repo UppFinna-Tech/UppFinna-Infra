@@ -212,30 +212,35 @@ jobs:
       fail-fast: false
       matrix:
         image:
-          # Each microservice is its own image in its own registry repo.
+          # Each microservice is its own image under the foreman project's
+          # GitLab Container Registry path
+          # (registry.projecttick.org/project-tick/infra/foreman/<name>).
+          # GitLab registry requires the path to live under a real project,
+          # so the repo is the project path + a per-image sub-path; the
+          # sub-paths are auto-created on first push.
           #   * web-ce / web-ee — Puma + Ruby app (CE strips ee/, EE ships it),
           #     built from Dockerfile.web via --target.
           #   * proxy  — Anubis WAF, built from our anubis/ source.
           #   * gitaly — Gitaly gRPC backend, built from our gitaly/ source.
           #   * docs   — Hugo docs site, built from our own source (no upstream image).
           - name: web-ce
-            repo: foreman-web-ce
+            repo: project-tick/infra/foreman/web-ce
             dockerfile: ./Dockerfile.web
             target: ce
           - name: web-ee
-            repo: foreman-web-ee
+            repo: project-tick/infra/foreman/web-ee
             dockerfile: ./Dockerfile.web
             target: ee
           - name: proxy
-            repo: foreman-proxy
+            repo: project-tick/infra/foreman/proxy
             dockerfile: ./Dockerfile.proxy
             target: runtime
           - name: gitaly
-            repo: foreman-gitaly
+            repo: project-tick/infra/foreman/gitaly
             dockerfile: ./Dockerfile.gitaly
             target: runtime
           - name: docs
-            repo: foreman-docs
+            repo: project-tick/infra/foreman/docs
             dockerfile: ./Dockerfile.docs
             target: runtime
 
@@ -385,7 +390,8 @@ jobs:
       - name: Push chart (OCI)
         if: github.ref == 'refs/heads/master'
         run: |
-          helm push "${{ steps.pkg.outputs.package }}" "oci://${REGISTRY}/helm"
+          helm push "${{ steps.pkg.outputs.package }}" \
+            "oci://${REGISTRY}/project-tick/infra/foreman/charts"
 
       - name: Foreman job finalize
         if: always()

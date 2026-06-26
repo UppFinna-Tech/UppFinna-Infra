@@ -93,6 +93,15 @@ runs:
 
         Get-ChildItem ${{ env.INSTALL_PORTABLE_DIR }} -Recurse | ForEach FullName | Resolve-Path -Relative | %{ $_.TrimStart('.\') } | %{ $_.TrimStart('${{ env.INSTALL_PORTABLE_DIR }}') } | %{ $_.TrimStart('\') } | Out-File -FilePath ${{ env.INSTALL_DIR }}/manifest.txt
 
+    - name: Install NSIS
+      shell: pwsh
+      run: |
+        # NSIS (makensis) builds the Windows installer below. It is no longer
+        # preinstalled on the runner image, so install it via Chocolatey and add
+        # its bin dir to PATH for subsequent steps.
+        choco install nsis --no-progress -y
+        "C:\Program Files (x86)\NSIS" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+
     - name: Package (installer)
       shell: pwsh
       env:

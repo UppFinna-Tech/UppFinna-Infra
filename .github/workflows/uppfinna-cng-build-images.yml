@@ -195,7 +195,7 @@ jobs:
           source-repository: ${{ inputs.cng-repository != '' && inputs.cng-repository || 'https://git.projecttick.org/project-tick/uppfinna/cng' }}
           ref: ${{ inputs.cng-ref || 'master' }}
           submodules: true
-      - uses: Project-Tick/Project-Tick/.github/actions/uppfinna-cng-image
+      - uses: Project-Tick/Project-Tick/.github/actions/uppfinna-cng-image@master
         with:
           image: gitlab-rails-ce
           gitlab-version: ${{ inputs.gitlab-version }}

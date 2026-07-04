@@ -76,6 +76,14 @@ jobs:
           registry-user: ${{ secrets.CNG_REGISTRY_USER }}
           registry-password: ${{ secrets.CNG_REGISTRY_PASSWORD }}
           fetch-artifacts-pat: ${{ secrets.CNG_FETCH_ARTIFACTS_PAT }}
+          ci-registry: ${{ vars.CNG_REGISTRY || 'registry.projecttick.org' }}
+          ci-registry-image: ${{ vars.CNG_REGISTRY_IMAGE || 'registry.projecttick.org/project-tick/cng' }}
+          gitlab-namespace: ${{ vars.CNG_GITLAB_NAMESPACE || 'project-tick' }}
+          ce-project: ${{ vars.CNG_CE_PROJECT || 'gitlab' }}
+          ci-api-v4-url: ${{ vars.CNG_API_V4_URL || 'https://git.projecttick.org/api/v4' }}
+          ci-server-fqdn: ${{ vars.CNG_SERVER_FQDN || 'git.projecttick.org' }}
+          gitaly-git-repo-url: ${{ vars.CNG_GITALY_GIT_REPO_URL || 'https://gitlab.com/gitlab-org/gitaly.git' }}
+          assets-image-registry-prefix: ${{ vars.CNG_ASSETS_IMAGE_REGISTRY_PREFIX || 'registry.gitlab.com/gitlab-org' }}
 
   phase-one:
     name: "phase-one: ${{ matrix.image }}"
@@ -106,6 +114,14 @@ jobs:
           registry-user: ${{ secrets.CNG_REGISTRY_USER }}
           registry-password: ${{ secrets.CNG_REGISTRY_PASSWORD }}
           fetch-artifacts-pat: ${{ secrets.CNG_FETCH_ARTIFACTS_PAT }}
+          ci-registry: ${{ vars.CNG_REGISTRY || 'registry.projecttick.org' }}
+          ci-registry-image: ${{ vars.CNG_REGISTRY_IMAGE || 'registry.projecttick.org/project-tick/cng' }}
+          gitlab-namespace: ${{ vars.CNG_GITLAB_NAMESPACE || 'project-tick' }}
+          ce-project: ${{ vars.CNG_CE_PROJECT || 'gitlab' }}
+          ci-api-v4-url: ${{ vars.CNG_API_V4_URL || 'https://git.projecttick.org/api/v4' }}
+          ci-server-fqdn: ${{ vars.CNG_SERVER_FQDN || 'git.projecttick.org' }}
+          gitaly-git-repo-url: ${{ vars.CNG_GITALY_GIT_REPO_URL || 'https://gitlab.com/gitlab-org/gitaly.git' }}
+          assets-image-registry-prefix: ${{ vars.CNG_ASSETS_IMAGE_REGISTRY_PREFIX || 'registry.gitlab.com/gitlab-org' }}
 
   phase-two:
     name: "phase-two: gitlab-base"
@@ -127,6 +143,14 @@ jobs:
           registry-user: ${{ secrets.CNG_REGISTRY_USER }}
           registry-password: ${{ secrets.CNG_REGISTRY_PASSWORD }}
           fetch-artifacts-pat: ${{ secrets.CNG_FETCH_ARTIFACTS_PAT }}
+          ci-registry: ${{ vars.CNG_REGISTRY || 'registry.projecttick.org' }}
+          ci-registry-image: ${{ vars.CNG_REGISTRY_IMAGE || 'registry.projecttick.org/project-tick/cng' }}
+          gitlab-namespace: ${{ vars.CNG_GITLAB_NAMESPACE || 'project-tick' }}
+          ce-project: ${{ vars.CNG_CE_PROJECT || 'gitlab' }}
+          ci-api-v4-url: ${{ vars.CNG_API_V4_URL || 'https://git.projecttick.org/api/v4' }}
+          ci-server-fqdn: ${{ vars.CNG_SERVER_FQDN || 'git.projecttick.org' }}
+          gitaly-git-repo-url: ${{ vars.CNG_GITALY_GIT_REPO_URL || 'https://gitlab.com/gitlab-org/gitaly.git' }}
+          assets-image-registry-prefix: ${{ vars.CNG_ASSETS_IMAGE_REGISTRY_PREFIX || 'registry.gitlab.com/gitlab-org' }}
 
   phase-three:
     name: "phase-three: ${{ matrix.image }}"
@@ -152,6 +176,14 @@ jobs:
           registry-user: ${{ secrets.CNG_REGISTRY_USER }}
           registry-password: ${{ secrets.CNG_REGISTRY_PASSWORD }}
           fetch-artifacts-pat: ${{ secrets.CNG_FETCH_ARTIFACTS_PAT }}
+          ci-registry: ${{ vars.CNG_REGISTRY || 'registry.projecttick.org' }}
+          ci-registry-image: ${{ vars.CNG_REGISTRY_IMAGE || 'registry.projecttick.org/project-tick/cng' }}
+          gitlab-namespace: ${{ vars.CNG_GITLAB_NAMESPACE || 'project-tick' }}
+          ce-project: ${{ vars.CNG_CE_PROJECT || 'gitlab' }}
+          ci-api-v4-url: ${{ vars.CNG_API_V4_URL || 'https://git.projecttick.org/api/v4' }}
+          ci-server-fqdn: ${{ vars.CNG_SERVER_FQDN || 'git.projecttick.org' }}
+          gitaly-git-repo-url: ${{ vars.CNG_GITALY_GIT_REPO_URL || 'https://gitlab.com/gitlab-org/gitaly.git' }}
+          assets-image-registry-prefix: ${{ vars.CNG_ASSETS_IMAGE_REGISTRY_PREFIX || 'registry.gitlab.com/gitlab-org' }}
 
   phase-four:
     name: "phase-four: ${{ matrix.image }}"
@@ -182,6 +214,14 @@ jobs:
           registry-user: ${{ secrets.CNG_REGISTRY_USER }}
           registry-password: ${{ secrets.CNG_REGISTRY_PASSWORD }}
           fetch-artifacts-pat: ${{ secrets.CNG_FETCH_ARTIFACTS_PAT }}
+          ci-registry: ${{ vars.CNG_REGISTRY || 'registry.projecttick.org' }}
+          ci-registry-image: ${{ vars.CNG_REGISTRY_IMAGE || 'registry.projecttick.org/project-tick/cng' }}
+          gitlab-namespace: ${{ vars.CNG_GITLAB_NAMESPACE || 'project-tick' }}
+          ce-project: ${{ vars.CNG_CE_PROJECT || 'gitlab' }}
+          ci-api-v4-url: ${{ vars.CNG_API_V4_URL || 'https://git.projecttick.org/api/v4' }}
+          ci-server-fqdn: ${{ vars.CNG_SERVER_FQDN || 'git.projecttick.org' }}
+          gitaly-git-repo-url: ${{ vars.CNG_GITALY_GIT_REPO_URL || 'https://gitlab.com/gitlab-org/gitaly.git' }}
+          assets-image-registry-prefix: ${{ vars.CNG_ASSETS_IMAGE_REGISTRY_PREFIX || 'registry.gitlab.com/gitlab-org' }}
 
   phase-five:
     name: "phase-five: gitlab-rails-ce"
@@ -203,6 +243,14 @@ jobs:
           registry-user: ${{ secrets.CNG_REGISTRY_USER }}
           registry-password: ${{ secrets.CNG_REGISTRY_PASSWORD }}
           fetch-artifacts-pat: ${{ secrets.CNG_FETCH_ARTIFACTS_PAT }}
+          ci-registry: ${{ vars.CNG_REGISTRY || 'registry.projecttick.org' }}
+          ci-registry-image: ${{ vars.CNG_REGISTRY_IMAGE || 'registry.projecttick.org/project-tick/cng' }}
+          gitlab-namespace: ${{ vars.CNG_GITLAB_NAMESPACE || 'project-tick' }}
+          ce-project: ${{ vars.CNG_CE_PROJECT || 'gitlab' }}
+          ci-api-v4-url: ${{ vars.CNG_API_V4_URL || 'https://git.projecttick.org/api/v4' }}
+          ci-server-fqdn: ${{ vars.CNG_SERVER_FQDN || 'git.projecttick.org' }}
+          gitaly-git-repo-url: ${{ vars.CNG_GITALY_GIT_REPO_URL || 'https://gitlab.com/gitlab-org/gitaly.git' }}
+          assets-image-registry-prefix: ${{ vars.CNG_ASSETS_IMAGE_REGISTRY_PREFIX || 'registry.gitlab.com/gitlab-org' }}
 
   phase-six:
     name: "phase-six: ${{ matrix.image }}"
@@ -228,3 +276,11 @@ jobs:
           registry-user: ${{ secrets.CNG_REGISTRY_USER }}
           registry-password: ${{ secrets.CNG_REGISTRY_PASSWORD }}
           fetch-artifacts-pat: ${{ secrets.CNG_FETCH_ARTIFACTS_PAT }}
+          ci-registry: ${{ vars.CNG_REGISTRY || 'registry.projecttick.org' }}
+          ci-registry-image: ${{ vars.CNG_REGISTRY_IMAGE || 'registry.projecttick.org/project-tick/cng' }}
+          gitlab-namespace: ${{ vars.CNG_GITLAB_NAMESPACE || 'project-tick' }}
+          ce-project: ${{ vars.CNG_CE_PROJECT || 'gitlab' }}
+          ci-api-v4-url: ${{ vars.CNG_API_V4_URL || 'https://git.projecttick.org/api/v4' }}
+          ci-server-fqdn: ${{ vars.CNG_SERVER_FQDN || 'git.projecttick.org' }}
+          gitaly-git-repo-url: ${{ vars.CNG_GITALY_GIT_REPO_URL || 'https://gitlab.com/gitlab-org/gitaly.git' }}
+          assets-image-registry-prefix: ${{ vars.CNG_ASSETS_IMAGE_REGISTRY_PREFIX || 'registry.gitlab.com/gitlab-org' }}

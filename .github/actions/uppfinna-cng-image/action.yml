@@ -24,6 +24,22 @@ inputs:
     default: ""
   fetch-artifacts-pat:
     default: ""
+  ci-registry:
+    default: "registry.projecttick.org"
+  ci-registry-image:
+    default: "registry.projecttick.org/project-tick/cng"
+  gitlab-namespace:
+    default: "project-tick"
+  ce-project:
+    default: "gitlab"
+  ci-api-v4-url:
+    default: "https://git.projecttick.org/api/v4"
+  ci-server-fqdn:
+    default: "git.projecttick.org"
+  gitaly-git-repo-url:
+    default: "https://gitlab.com/gitlab-org/gitaly.git"
+  assets-image-registry-prefix:
+    default: "registry.gitlab.com/gitlab-org"
 
 runs:
   using: composite
@@ -48,7 +64,7 @@ runs:
       env:
         CNG_REGISTRY_USER: ${{ inputs.registry-user }}
         CNG_REGISTRY_PASSWORD: ${{ inputs.registry-password }}
-        CI_REGISTRY: ${{ vars.CNG_REGISTRY || 'registry.projecttick.org' }}
+        CI_REGISTRY: ${{ inputs.ci-registry }}
       run: |
         set -euo pipefail
         if [ -z "${CNG_REGISTRY_USER:-}" ] || [ -z "${CNG_REGISTRY_PASSWORD:-}" ]; then
@@ -60,15 +76,15 @@ runs:
     - name: Build ${{ inputs.image }}
       shell: bash
       env:
-        CI_REGISTRY: ${{ vars.CNG_REGISTRY || 'registry.projecttick.org' }}
-        CI_REGISTRY_IMAGE: ${{ vars.CNG_REGISTRY_IMAGE || 'registry.projecttick.org/project-tick/cng' }}
-        GITLAB_NAMESPACE: ${{ vars.CNG_GITLAB_NAMESPACE || 'project-tick' }}
-        CE_PROJECT: ${{ vars.CNG_CE_PROJECT || 'gitlab' }}
-        CI_API_V4_URL: ${{ vars.CNG_API_V4_URL || 'https://git.projecttick.org/api/v4' }}
-        CI_SERVER_FQDN: ${{ vars.CNG_SERVER_FQDN || 'git.projecttick.org' }}
-        CI_SERVER_HOST: ${{ vars.CNG_SERVER_FQDN || 'git.projecttick.org' }}
+        CI_REGISTRY: ${{ inputs.ci-registry }}
+        CI_REGISTRY_IMAGE: ${{ inputs.ci-registry-image }}
+        GITLAB_NAMESPACE: ${{ inputs.gitlab-namespace }}
+        CE_PROJECT: ${{ inputs.ce-project }}
+        CI_API_V4_URL: ${{ inputs.ci-api-v4-url }}
+        CI_SERVER_FQDN: ${{ inputs.ci-server-fqdn }}
+        CI_SERVER_HOST: ${{ inputs.ci-server-fqdn }}
         CI_SERVER_PROTOCOL: "https"
-        GITALY_GIT_REPO_URL: ${{ vars.CNG_GITALY_GIT_REPO_URL || 'https://gitlab.com/gitlab-org/gitaly.git' }}
+        GITALY_GIT_REPO_URL: ${{ inputs.gitaly-git-repo-url }}
         DISABLE_BUILDX_CLUSTER: "true"
         ARCH_LIST: "amd64"
         SKIP_IMAGE_SIGNING: "true"
@@ -113,13 +129,13 @@ runs:
         GITLAB_ZOEKT_SHA: "v1.17.1"
         GITLAB_ZOEKT_TAG: "v1.17.1"
         GIT_FILTER_REPO_VERSION: "2.47.0"
-        GITALY_SERVER_VERSION: ${{ inputs.gitaly-version != '' && inputs.gitaly-version || (vars.CNG_GITALY_SERVER_VERSION || 'master') }}
-        GITLAB_SHELL_VERSION: ${{ inputs.gitlab-shell-version != '' && inputs.gitlab-shell-version || (vars.CNG_GITLAB_SHELL_VERSION || 'main') }}
-        GITLAB_PAGES_VERSION: ${{ inputs.gitlab-pages-version != '' && inputs.gitlab-pages-version || (vars.CNG_GITLAB_PAGES_VERSION || 'master') }}
-        GITLAB_KAS_VERSION: ${{ inputs.gitlab-kas-version != '' && inputs.gitlab-kas-version || (vars.CNG_GITLAB_KAS_VERSION || 'master') }}
-        GITLAB_ELASTICSEARCH_INDEXER_VERSION: ${{ inputs.gitlab-elasticsearch-indexer-version != '' && inputs.gitlab-elasticsearch-indexer-version || (vars.CNG_GITLAB_ELASTICSEARCH_INDEXER_VERSION || 'main') }}
-        OPENBAO_NAMESPACE: "${{ vars.CNG_GITLAB_NAMESPACE || 'project-tick' }}/govern/secrets-management"
-        ASSETS_IMAGE_REGISTRY_PREFIX: ${{ vars.CNG_ASSETS_IMAGE_REGISTRY_PREFIX || 'registry.gitlab.com/gitlab-org' }}
+        GITALY_SERVER_VERSION: ${{ inputs.gitaly-version != '' && inputs.gitaly-version || 'master' }}
+        GITLAB_SHELL_VERSION: ${{ inputs.gitlab-shell-version != '' && inputs.gitlab-shell-version || 'main' }}
+        GITLAB_PAGES_VERSION: ${{ inputs.gitlab-pages-version != '' && inputs.gitlab-pages-version || 'master' }}
+        GITLAB_KAS_VERSION: ${{ inputs.gitlab-kas-version != '' && inputs.gitlab-kas-version || 'master' }}
+        GITLAB_ELASTICSEARCH_INDEXER_VERSION: ${{ inputs.gitlab-elasticsearch-indexer-version != '' && inputs.gitlab-elasticsearch-indexer-version || 'main' }}
+        OPENBAO_NAMESPACE: "${{ inputs.gitlab-namespace }}/govern/secrets-management"
+        ASSETS_IMAGE_REGISTRY_PREFIX: ${{ inputs.assets-image-registry-prefix }}
         ASSETS_IMAGE_PREFIX: "gitlab-assets"
         ASSETS_IMAGE_PLATFORM: "linux/amd64"
         GITLAB_ASSETS_TAG: ${{ inputs.gitlab-version || 'master' }}

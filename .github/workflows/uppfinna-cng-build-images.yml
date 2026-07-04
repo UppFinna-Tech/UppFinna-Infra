@@ -77,7 +77,7 @@ jobs:
           registry-password: ${{ secrets.CNG_REGISTRY_PASSWORD }}
           fetch-artifacts-pat: ${{ secrets.CNG_FETCH_ARTIFACTS_PAT }}
           ci-registry: ${{ vars.CNG_REGISTRY || 'registry.projecttick.org' }}
-          ci-registry-image: ${{ vars.CNG_REGISTRY_IMAGE || 'registry.projecttick.org/project-tick/cng' }}
+          ci-registry-image: ${{ vars.CNG_REGISTRY_IMAGE || 'registry.projecttick.org/project-tick/uppfinna/cng' }}
           gitlab-namespace: ${{ vars.CNG_GITLAB_NAMESPACE || 'project-tick' }}
           ce-project: ${{ vars.CNG_CE_PROJECT || 'gitlab' }}
           ci-api-v4-url: ${{ vars.CNG_API_V4_URL || 'https://git.projecttick.org/api/v4' }}
@@ -115,7 +115,7 @@ jobs:
           registry-password: ${{ secrets.CNG_REGISTRY_PASSWORD }}
           fetch-artifacts-pat: ${{ secrets.CNG_FETCH_ARTIFACTS_PAT }}
           ci-registry: ${{ vars.CNG_REGISTRY || 'registry.projecttick.org' }}
-          ci-registry-image: ${{ vars.CNG_REGISTRY_IMAGE || 'registry.projecttick.org/project-tick/cng' }}
+          ci-registry-image: ${{ vars.CNG_REGISTRY_IMAGE || 'registry.projecttick.org/project-tick/uppfinna/cng' }}
           gitlab-namespace: ${{ vars.CNG_GITLAB_NAMESPACE || 'project-tick' }}
           ce-project: ${{ vars.CNG_CE_PROJECT || 'gitlab' }}
           ci-api-v4-url: ${{ vars.CNG_API_V4_URL || 'https://git.projecttick.org/api/v4' }}
@@ -144,7 +144,7 @@ jobs:
           registry-password: ${{ secrets.CNG_REGISTRY_PASSWORD }}
           fetch-artifacts-pat: ${{ secrets.CNG_FETCH_ARTIFACTS_PAT }}
           ci-registry: ${{ vars.CNG_REGISTRY || 'registry.projecttick.org' }}
-          ci-registry-image: ${{ vars.CNG_REGISTRY_IMAGE || 'registry.projecttick.org/project-tick/cng' }}
+          ci-registry-image: ${{ vars.CNG_REGISTRY_IMAGE || 'registry.projecttick.org/project-tick/uppfinna/cng' }}
           gitlab-namespace: ${{ vars.CNG_GITLAB_NAMESPACE || 'project-tick' }}
           ce-project: ${{ vars.CNG_CE_PROJECT || 'gitlab' }}
           ci-api-v4-url: ${{ vars.CNG_API_V4_URL || 'https://git.projecttick.org/api/v4' }}
@@ -177,7 +177,7 @@ jobs:
           registry-password: ${{ secrets.CNG_REGISTRY_PASSWORD }}
           fetch-artifacts-pat: ${{ secrets.CNG_FETCH_ARTIFACTS_PAT }}
           ci-registry: ${{ vars.CNG_REGISTRY || 'registry.projecttick.org' }}
-          ci-registry-image: ${{ vars.CNG_REGISTRY_IMAGE || 'registry.projecttick.org/project-tick/cng' }}
+          ci-registry-image: ${{ vars.CNG_REGISTRY_IMAGE || 'registry.projecttick.org/project-tick/uppfinna/cng' }}
           gitlab-namespace: ${{ vars.CNG_GITLAB_NAMESPACE || 'project-tick' }}
           ce-project: ${{ vars.CNG_CE_PROJECT || 'gitlab' }}
           ci-api-v4-url: ${{ vars.CNG_API_V4_URL || 'https://git.projecttick.org/api/v4' }}
@@ -215,7 +215,7 @@ jobs:
           registry-password: ${{ secrets.CNG_REGISTRY_PASSWORD }}
           fetch-artifacts-pat: ${{ secrets.CNG_FETCH_ARTIFACTS_PAT }}
           ci-registry: ${{ vars.CNG_REGISTRY || 'registry.projecttick.org' }}
-          ci-registry-image: ${{ vars.CNG_REGISTRY_IMAGE || 'registry.projecttick.org/project-tick/cng' }}
+          ci-registry-image: ${{ vars.CNG_REGISTRY_IMAGE || 'registry.projecttick.org/project-tick/uppfinna/cng' }}
           gitlab-namespace: ${{ vars.CNG_GITLAB_NAMESPACE || 'project-tick' }}
           ce-project: ${{ vars.CNG_CE_PROJECT || 'gitlab' }}
           ci-api-v4-url: ${{ vars.CNG_API_V4_URL || 'https://git.projecttick.org/api/v4' }}
@@ -244,7 +244,7 @@ jobs:
           registry-password: ${{ secrets.CNG_REGISTRY_PASSWORD }}
           fetch-artifacts-pat: ${{ secrets.CNG_FETCH_ARTIFACTS_PAT }}
           ci-registry: ${{ vars.CNG_REGISTRY || 'registry.projecttick.org' }}
-          ci-registry-image: ${{ vars.CNG_REGISTRY_IMAGE || 'registry.projecttick.org/project-tick/cng' }}
+          ci-registry-image: ${{ vars.CNG_REGISTRY_IMAGE || 'registry.projecttick.org/project-tick/uppfinna/cng' }}
           gitlab-namespace: ${{ vars.CNG_GITLAB_NAMESPACE || 'project-tick' }}
           ce-project: ${{ vars.CNG_CE_PROJECT || 'gitlab' }}
           ci-api-v4-url: ${{ vars.CNG_API_V4_URL || 'https://git.projecttick.org/api/v4' }}
@@ -277,7 +277,7 @@ jobs:
           registry-password: ${{ secrets.CNG_REGISTRY_PASSWORD }}
           fetch-artifacts-pat: ${{ secrets.CNG_FETCH_ARTIFACTS_PAT }}
           ci-registry: ${{ vars.CNG_REGISTRY || 'registry.projecttick.org' }}
-          ci-registry-image: ${{ vars.CNG_REGISTRY_IMAGE || 'registry.projecttick.org/project-tick/cng' }}
+          ci-registry-image: ${{ vars.CNG_REGISTRY_IMAGE || 'registry.projecttick.org/project-tick/uppfinna/cng' }}
           gitlab-namespace: ${{ vars.CNG_GITLAB_NAMESPACE || 'project-tick' }}
           ce-project: ${{ vars.CNG_CE_PROJECT || 'gitlab' }}
           ci-api-v4-url: ${{ vars.CNG_API_V4_URL || 'https://git.projecttick.org/api/v4' }}

@@ -53,7 +53,7 @@ jobs:
       HELM_RELEASE: ${{ vars.HELM_RELEASE || 'gitlab' }}
       HELM_NAMESPACE: ${{ vars.HELM_NAMESPACE || 'gitlab' }}
       HELM_CHART: ${{ vars.HELM_CHART || 'gitlab/gitlab' }}
-      IMAGE_REGISTRY: ${{ vars.CNG_IMAGE_REGISTRY || 'registry.projecttick.org/project-tick/cng' }}
+      IMAGE_REGISTRY: ${{ vars.CNG_IMAGE_REGISTRY || 'registry.projecttick.org/project-tick/uppfinna/cng' }}
       IMAGE_TAG: ${{ inputs.image-tag }}
       DEPLOY_HOST: ${{ vars.DEPLOY_HOST }}
       DEPLOY_USER: ${{ vars.DEPLOY_USER || 'deploy' }}

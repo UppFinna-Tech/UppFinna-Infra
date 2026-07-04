@@ -27,7 +27,7 @@ inputs:
   ci-registry:
     default: "registry.projecttick.org"
   ci-registry-image:
-    default: "registry.projecttick.org/project-tick/cng"
+    default: "registry.projecttick.org/project-tick/uppfinna/cng"
   gitlab-namespace:
     default: "project-tick"
   ce-project:

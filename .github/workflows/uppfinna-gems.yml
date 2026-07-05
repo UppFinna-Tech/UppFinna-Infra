@@ -38,6 +38,34 @@ jobs:
     runs-on: ubuntu-24.04
     permissions:
       contents: read
+    # Some gems require a database or Redis; their own .gitlab-ci.yml declares
+    # the services and DB setup, which GitLab CI runs as per-gem child
+    # pipelines. This GHA port runs a single generic job, so the services are
+    # provided here and per-gem setup is replicated in the "Gem-specific setup"
+    # step below. Gems that need neither simply ignore them.
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: gitlab
+          POSTGRES_PASSWORD: password
+          POSTGRES_HOST_AUTH_METHOD: trust
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 6
+      redis:
+        image: redis:7.2-alpine
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     strategy:
       fail-fast: false
       matrix:
@@ -69,6 +97,14 @@ jobs:
       GITLAB_DIR: ${{ inputs.source-repository != '' && '.' || 'gitlab' }}
       BUNDLE_FROZEN: "true"
       GLCI_TEST_METRICS_RUN_TYPE: "${{ matrix.gem_name }}-tests"
+      # Service connection details for gems that need a database or Redis.
+      POSTGRES_USER: gitlab
+      POSTGRES_PASSWORD: password
+      POSTGRES_HOST: localhost
+      PGHOST: localhost
+      PGUSER: gitlab
+      PGPASSWORD: password
+      REDIS_URL: "redis://localhost:6379"
     defaults:
       run:
         shell: bash
@@ -125,10 +161,87 @@ jobs:
             echo "No .rubocop.yml, skipping RuboCop."
           fi
 
+      # Replicates the per-gem `before_script` from each gem's .gitlab-ci.yml
+      # that GitLab CI runs in dedicated child pipelines. Only the gems that
+      # need a database/config are handled; others fall through untouched.
+      - name: Gem-specific setup
+        run: |
+          set -euo pipefail
+          gem_name="${{ matrix.gem_name }}"
+
+          # Ensure a psql client is available for the DB-backed gems below.
+          ensure_psql() {
+            command -v psql >/dev/null 2>&1 || sudo apt-get update -qq && sudo apt-get install -y --no-install-recommends postgresql-client
+          }
+
+          # Prepare config/database.yml pointing at the postgres service for gems
+          # that boot ActiveRecord. Host is localhost because the job runs
+          # directly on the runner (not in a container).
+          setup_database_yml() {
+            cp config/database.yml.postgresql config/database.yml
+            sed -i 's/username: postgres$/username: gitlab/g' config/database.yml
+            sed -i 's/password:\s*$/password: password/g' config/database.yml
+            sed -i 's/host: localhost$/host: localhost/g' config/database.yml
+          }
+
+          create_test_databases() {
+            psql -h localhost -U gitlab -c 'create database gitlabhq_test;' || true
+            psql -h localhost -U gitlab -c 'create database gitlabhq_ci_test;' || true
+          }
+
+          case "$gem_name" in
+            gitlab-database-load_balancing|gitlab-database-data_isolation)
+              setup_database_yml
+              ;;
+            gitlab-active-context)
+              ensure_psql
+              setup_database_yml
+              create_test_databases
+              ;;
+            gitlab-backup-cli)
+              ensure_psql
+              cp gems/gitlab-backup-cli/spec/fixtures/config/database.yml config/database.yml
+              sed -i 's/username: postgres$/username: gitlab/g' config/database.yml
+              sed -i 's/password:\s*$/password: password/g' config/database.yml
+              sed -i 's/host: localhost$/host: localhost/g' config/database.yml
+              cp db/structure.sql structure.sql
+              create_test_databases
+              psql -h localhost -U gitlab -d gitlabhq_test -q < structure.sql > /dev/null
+              psql -h localhost -U gitlab -d gitlabhq_ci_test -q < structure.sql > /dev/null
+              ;;
+            *)
+              echo "No gem-specific setup for ${gem_name}."
+              ;;
+          esac
+
+      # Most gems run `rspec`, but a few define a different test command in
+      # their .gitlab-ci.yml (they don't ship an rspec binary). Mirror those.
       - name: RSpec
         run: |
+          set -euo pipefail
           cd "gems/${{ matrix.gem_name }}"
-          RAILS_ENV=test bundle exec rspec
+          case "${{ matrix.gem_name }}" in
+            bundler-checksum)
+              # No rspec suite; the gem is tested via its own script.
+              pushd test/project_with_checksum_lock && scripts/test
+              ;;
+            gitlab-housekeeper)
+              RAILS_ENV=test bundle exec rspec
+              # Integration test from the gem's .gitlab-ci.yml.
+              mkdir -p keeps
+              cp spec/fixtures/pretty_useless_keep.rb keeps/
+              git init --initial-branch=master
+              git config user.email "test@example.com"
+              git config user.name "Test User"
+              git commit --allow-empty -m "Initial commit"
+              bundle exec bin/gitlab-housekeeper -k Keeps::PrettyUselessKeep -d
+              bundle exec bin/gitlab-housekeeper -k Keeps::PrettyUselessKeep -d -m 3
+              bundle exec bin/gitlab-housekeeper -k Keeps::PrettyUselessKeep -d -m 3 --filter-identifiers=2
+              ;;
+            *)
+              RAILS_ENV=test bundle exec rspec
+              ;;
+          esac
 
       - name: Upload coverage
         if: always()

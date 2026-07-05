@@ -38,6 +38,16 @@ jobs:
     runs-on: ubuntu-24.04
     permissions:
       contents: read
+    services:
+      redis:
+        image: redis:7.2-alpine
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     strategy:
       fail-fast: false
       matrix:
@@ -56,6 +66,7 @@ jobs:
       GITLAB_DIR: ${{ inputs.source-repository != '' && '.' || 'gitlab' }}
       BUNDLE_FROZEN: "true"
       GLCI_TEST_METRICS_RUN_TYPE: "${{ matrix.gem_name }}-tests"
+      REDIS_URL: "redis://localhost:6379"
     defaults:
       run:
         shell: bash

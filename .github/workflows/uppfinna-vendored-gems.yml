@@ -114,8 +114,19 @@ jobs:
 
       - name: RSpec
         run: |
+          set -euo pipefail
           cd "vendor/gems/${{ matrix.gem_name }}"
-          RAILS_ENV=test bundle exec rspec
+          export RAILS_ENV=test
+          if [ -d spec ] && bundle exec ruby -e "require 'rspec/core'" >/dev/null 2>&1; then
+            echo "Detected RSpec suite -> bundle exec rspec"
+            bundle exec rspec
+          elif bundle exec rake -T 2>/dev/null | grep -qE '^rake test( |$)'; then
+            echo "Detected rake test task -> bundle exec rake test"
+            bundle exec rake test
+          else
+            echo "Falling back to the gem's default rake task -> bundle exec rake"
+            bundle exec rake
+          fi
 
       - name: Upload coverage
         if: always()

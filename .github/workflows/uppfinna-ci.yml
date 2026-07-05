@@ -269,6 +269,8 @@ jobs:
     needs: [callback-start, build-cng, cng-build-images, rspec-pg16, rspec-pg18, rspec-valkey, rspec-redis70, rubocop, yaml-lint, setup-checks]
     if: |
       vars.DEPLOY_ENABLED == 'true' &&
+      inputs.event-name != 'pull_request' &&
+      (inputs.source-ref == '' || endsWith(inputs.source-ref, '/master') || inputs.source-ref == 'master') &&
       needs.build-cng.result == 'success' &&
       needs.cng-build-images.result == 'success' &&
       needs.rspec-pg16.result == 'success' &&

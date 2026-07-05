@@ -164,7 +164,7 @@ jobs:
         run: scripts/gitaly-test-build
 
       - name: Compile test assets
-        if: ${{ matrix.level == 'system' }}
+        if: ${{ matrix.level != 'migration' && matrix.level != 'background_migration' }}
         run: scripts/compile_assets
 
       - name: Install knapsack

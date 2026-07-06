@@ -61,11 +61,22 @@ jobs:
           --health-retries 6
     strategy:
       fail-fast: false
+      # Heavy levels are split across Knapsack nodes (CI_NODE_TOTAL /
+      # CI_NODE_INDEX, 0-based) to keep each node under the 6h runner limit.
       matrix:
         include:
-          - { job_name: "rspec unit pg17 valkey", level: unit }
-          - { job_name: "rspec integration pg17 valkey", level: integration }
-          - { job_name: "rspec system pg17 valkey", level: system }
+          - { job_name: "rspec unit pg17 valkey 1/4", level: unit, node_total: 4, ci_node_index: 0 }
+          - { job_name: "rspec unit pg17 valkey 2/4", level: unit, node_total: 4, ci_node_index: 1 }
+          - { job_name: "rspec unit pg17 valkey 3/4", level: unit, node_total: 4, ci_node_index: 2 }
+          - { job_name: "rspec unit pg17 valkey 4/4", level: unit, node_total: 4, ci_node_index: 3 }
+
+          - { job_name: "rspec integration pg17 valkey 1/2", level: integration, node_total: 2, ci_node_index: 0 }
+          - { job_name: "rspec integration pg17 valkey 2/2", level: integration, node_total: 2, ci_node_index: 1 }
+
+          - { job_name: "rspec system pg17 valkey 1/4", level: system, node_total: 4, ci_node_index: 0 }
+          - { job_name: "rspec system pg17 valkey 2/4", level: system, node_total: 4, ci_node_index: 1 }
+          - { job_name: "rspec system pg17 valkey 3/4", level: system, node_total: 4, ci_node_index: 2 }
+          - { job_name: "rspec system pg17 valkey 4/4", level: system, node_total: 4, ci_node_index: 3 }
     env:
       GITLAB_DIR: ${{ inputs.source-repository != '' && '.' || 'gitlab' }}
       RAILS_ENV: test
@@ -90,9 +101,12 @@ jobs:
       RSPEC_LAST_RUN_RESULTS_FILE: "rspec/rspec_last_run_results.txt"
       KNAPSACK_RSPEC_SUITE_REPORT_PATH: "knapsack/report-master.json"
       FLAKY_RSPEC_SUITE_REPORT_PATH: "rspec/flaky/report-suite.json"
-      CI_NODE_TOTAL: "1"
-      CI_NODE_INDEX: "0"
-      CI_JOB_ID: ${{ github.run_id }}
+      # Knapsack splits the suite across nodes; CI_NODE_INDEX is 0-based.
+      CI_NODE_TOTAL: "${{ matrix.node_total }}"
+      CI_NODE_INDEX: "${{ matrix.ci_node_index }}"
+      # Unique per matrix node so per-node RSpec report files (which embed
+      # CI_JOB_ID) do not collide when a level is split across nodes.
+      CI_JOB_ID: "${{ github.run_id }}-${{ strategy.job-index }}"
       CI_JOB_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
       CI_JOB_NAME: ${{ matrix.job_name }}
       RSPEC_OPTS: "--tag ~level:background_migration --tag ~click_house --tag ~duo_workflow_service --tag ~partition_tz"

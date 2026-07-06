@@ -128,15 +128,28 @@ jobs:
           set -euo pipefail
           cd "vendor/gems/${{ matrix.gem_name }}"
           export RAILS_ENV=test
+
           if [ -d spec ] && bundle exec ruby -e "require 'rspec/core'" >/dev/null 2>&1; then
             echo "Detected RSpec suite -> bundle exec rspec"
             bundle exec rspec
           elif bundle exec rake -T 2>/dev/null | grep -qE '^rake test( |$)'; then
             echo "Detected rake test task -> bundle exec rake test"
             bundle exec rake test
+          elif [ -f Rakefile ]; then
+            # Some vendored gems (e.g. diff_match_patch) do not list rake in
+            # their bundle and are tested upstream with a bare `rake` (system
+            # rake), not `bundle exec rake`. Using `bundle exec` here would fail
+            # with "can't find executable rake for gem rake". Fall back to the
+            # system rake, which resolves the gem-local Rakefile.
+            echo "Detected gem-local Rakefile -> rake (system)"
+            rake
           else
-            echo "Falling back to the gem's default rake task -> bundle exec rake"
-            bundle exec rake
+            # Generated API client gems (e.g. gitlab-topology-service-client,
+            # gitlab-duo-workflow-service-client) ship only lib/ with no test
+            # suite and no Rakefile. Running `bundle exec rake` here would walk
+            # up to the parent application's Rakefile and crash on
+            # `bootsnap/setup`. There is nothing to test, so skip.
+            echo "No spec/, rake test task, or gem-local Rakefile for ${{ matrix.gem_name }}; nothing to test. Skipping."
           fi
 
       - name: Upload coverage

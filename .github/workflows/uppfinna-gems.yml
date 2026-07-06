@@ -200,6 +200,16 @@ jobs:
               ;;
             gitlab-backup-cli)
               ensure_psql
+              # The restore specs copy a fake gitlab tree (spec/fixtures/gitlab_fake)
+              # into a temp dir and run `bundle exec rake gitlab:db:drop_tables`
+              # there. That fixture's Gemfile.lock pins rake 13.2.1, which is not
+              # otherwise installed on the GHA runner, so `bundle exec rake`
+              # fails with "Could not find rake-13.2.1". Install it up front so
+              # the fixture's bundle resolves.
+              fixture_rake_version="$(grep -A1 '^GEM' "gems/gitlab-backup-cli/spec/fixtures/gitlab_fake/Gemfile.lock" | grep -oE 'rake \([0-9.]+\)' | grep -oE '[0-9.]+' || true)"
+              if [ -n "${fixture_rake_version}" ]; then
+                gem install rake --version "${fixture_rake_version}" --no-document
+              fi
               cp gems/gitlab-backup-cli/spec/fixtures/config/database.yml config/database.yml
               sed -i 's/username: postgres$/username: gitlab/g' config/database.yml
               sed -i 's/password:\s*$/password: password/g' config/database.yml
@@ -222,10 +232,23 @@ jobs:
           cd "gems/${{ matrix.gem_name }}"
           case "${{ matrix.gem_name }}" in
             bundler-checksum)
-              # No rspec suite; the gem is tested via its own script.
+              # No rspec suite; the gem is tested via its own script. The
+              # script asserts that the running bundler matches $BUNDLER_VERSION
+              # (a matrix variable in the gem's own .gitlab-ci.yml that this GHA
+              # port does not define). Export it here, derived from the bundler
+              # actually installed by "Bundle install", so `set -u` in the
+              # script does not abort on an unbound variable.
+              BUNDLER_VERSION="$(bundler --version | awk '{print $3}')"
+              export BUNDLER_VERSION
               pushd test/project_with_checksum_lock && scripts/test
               ;;
             gitlab-housekeeper)
+              # The rspec suite creates throwaway git repositories and commits
+              # into them (see spec/gitlab/housekeeper/git_spec.rb). Those
+              # commits need a git identity; GitLab CI runners have a global one
+              # but the GHA runner does not, so set it before running the suite.
+              git config --global user.email "test@example.com"
+              git config --global user.name "Test User"
               RAILS_ENV=test bundle exec rspec
               # Integration test from the gem's .gitlab-ci.yml.
               mkdir -p keeps

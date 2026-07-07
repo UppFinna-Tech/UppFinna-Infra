@@ -176,66 +176,6 @@ jobs:
             "${CALLBACK_URL%/}/log_url" \
             || echo "::warning::log_url callback failed (non-fatal)"
 
-  rspec-pg16:
-    name: RSpec pg16
-    needs: callback-start
-    uses: ./.github/workflows/uppfinna-rspec-pg16.yml
-    permissions:
-      contents: read
-    with:
-      source-ref: ${{ inputs.source-ref }}
-      source-repository: ${{ inputs.source-repository }}
-      foreman-pipeline-id: ${{ needs.callback-start.outputs.pipeline_id }}
-      foreman-plan: ${{ inputs.foreman-plan }}
-      foreman-callback-url: ${{ needs.callback-start.outputs.callback_url }}
-      foreman-callback-token: ${{ needs.callback-start.outputs.cb_auth }}
-    secrets: inherit
-
-  rspec-pg18:
-    name: RSpec pg18
-    needs: callback-start
-    uses: ./.github/workflows/uppfinna-rspec-pg18.yml
-    permissions:
-      contents: read
-    with:
-      source-ref: ${{ inputs.source-ref }}
-      source-repository: ${{ inputs.source-repository }}
-      foreman-pipeline-id: ${{ needs.callback-start.outputs.pipeline_id }}
-      foreman-plan: ${{ inputs.foreman-plan }}
-      foreman-callback-url: ${{ needs.callback-start.outputs.callback_url }}
-      foreman-callback-token: ${{ needs.callback-start.outputs.cb_auth }}
-    secrets: inherit
-
-  rspec-valkey:
-    name: RSpec valkey
-    needs: callback-start
-    uses: ./.github/workflows/uppfinna-rspec-valkey.yml
-    permissions:
-      contents: read
-    with:
-      source-ref: ${{ inputs.source-ref }}
-      source-repository: ${{ inputs.source-repository }}
-      foreman-pipeline-id: ${{ needs.callback-start.outputs.pipeline_id }}
-      foreman-plan: ${{ inputs.foreman-plan }}
-      foreman-callback-url: ${{ needs.callback-start.outputs.callback_url }}
-      foreman-callback-token: ${{ needs.callback-start.outputs.cb_auth }}
-    secrets: inherit
-
-  rspec-redis70:
-    name: RSpec redis70
-    needs: callback-start
-    uses: ./.github/workflows/uppfinna-rspec-redis70.yml
-    permissions:
-      contents: read
-    with:
-      source-ref: ${{ inputs.source-ref }}
-      source-repository: ${{ inputs.source-repository }}
-      foreman-pipeline-id: ${{ needs.callback-start.outputs.pipeline_id }}
-      foreman-plan: ${{ inputs.foreman-plan }}
-      foreman-callback-url: ${{ needs.callback-start.outputs.callback_url }}
-      foreman-callback-token: ${{ needs.callback-start.outputs.cb_auth }}
-    secrets: inherit
-
   build-cng:
     name: Build CNG
     needs: callback-start
@@ -266,17 +206,14 @@ jobs:
 
   deploy:
     name: Deploy
-    needs: [callback-start, build-cng, cng-build-images, rspec-pg16, rspec-pg18, rspec-valkey, rspec-redis70, rubocop, yaml-lint, setup-checks]
+    needs: [callback-start, build-cng, cng-build-images, rspec, rubocop, yaml-lint, setup-checks]
     if: |
       vars.DEPLOY_ENABLED == 'true' &&
       inputs.event-name != 'pull_request' &&
       (inputs.source-ref == '' || endsWith(inputs.source-ref, '/master') || inputs.source-ref == 'master') &&
       needs.build-cng.result == 'success' &&
       needs.cng-build-images.result == 'success' &&
-      needs.rspec-pg16.result == 'success' &&
-      needs.rspec-pg18.result == 'success' &&
-      needs.rspec-valkey.result == 'success' &&
-      needs.rspec-redis70.result == 'success' &&
+      needs.rspec.result == 'success' &&
       needs.rubocop.result == 'success' &&
       needs.yaml-lint.result == 'success' &&
       needs.setup-checks.result == 'success'
@@ -704,10 +641,6 @@ jobs:
     if: always()
     needs:
       - callback-start
-      - rspec-pg16
-      - rspec-pg18
-      - rspec-valkey
-      - rspec-redis70
       - build-cng
       - cng-build-images
       - setup-checks

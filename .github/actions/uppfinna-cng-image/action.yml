@@ -146,6 +146,7 @@ runs:
         CI_COMMIT_REF_SLUG: ${{ inputs.image-tag || 'master' }}
         CI_COMMIT_REF_NAME: ${{ inputs.image-tag || 'master' }}
         CI_DEFAULT_BRANCH: master
+        CI_PROJECT_DIR: ${{ github.workspace }}
         FETCH_DEV_ARTIFACTS_PAT: ${{ inputs.fetch-artifacts-pat }}
       run: |
         set -eo pipefail

@@ -608,7 +608,10 @@ jobs:
 
   rspec:
     name: RSpec
-    needs: callback-start
+    # Wait for compile-test-assets so the rspec jobs can download the prebuilt
+    # assets instead of each recompiling them (webpack is the heaviest step for
+    # system/integration specs).
+    needs: [callback-start, compile-test-assets]
     uses: ./.github/workflows/uppfinna-rspec.yml
     permissions:
       contents: read

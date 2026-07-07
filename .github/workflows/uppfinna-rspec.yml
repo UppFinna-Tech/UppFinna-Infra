@@ -206,9 +206,15 @@ jobs:
       - name: Build Gitaly binaries
         run: scripts/gitaly-test-build
 
-      - name: Compile test assets
+      # Reuse the assets built once by the compile-test-assets job instead of
+      # recompiling webpack in every rspec job (the heaviest step for
+      # system/integration specs). Migration levels do not need assets.
+      - name: Download prebuilt test assets
         if: ${{ matrix.level != 'migration' && matrix.level != 'background_migration' }}
-        run: scripts/compile_assets
+        uses: actions/download-artifact@v4
+        with:
+          name: uppfinna-test-assets
+          path: ${{ env.GITLAB_DIR }}
 
       - name: Install knapsack
         run: gem install knapsack --no-document

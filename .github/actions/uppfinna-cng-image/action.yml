@@ -99,7 +99,10 @@ runs:
         DISABLE_BUILDX_CLUSTER: "true"
         MODE: ${{ inputs.mode }}
         ARCH_LIST: ${{ inputs.mode == 'merge' && 'amd64,arm64' || inputs.arch }}
-        ARCH_SUFFIX: ${{ inputs.mode == 'merge' && '' || format('-{0}', inputs.arch) }}
+        # Empty strings are falsy in expressions. The old merge-first ternary
+        # always fell through to -amd64; test build mode instead so merge gets
+        # an actually empty suffix.
+        ARCH_SUFFIX: ${{ inputs.mode == 'build' && format('-{0}', inputs.arch) || '' }}
         SKIP_IMAGE_SIGNING: "true"
         SKIP_IMAGE_VERIFICATION: "true"
         COSIGN_YES: "true"

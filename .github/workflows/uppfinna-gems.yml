@@ -268,7 +268,7 @@ jobs:
 
       - name: Upload coverage
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: uppfinna-gem-${{ matrix.gem_name }}-coverage
           path: ${{ env.GITLAB_DIR }}/gems/${{ matrix.gem_name }}/coverage/

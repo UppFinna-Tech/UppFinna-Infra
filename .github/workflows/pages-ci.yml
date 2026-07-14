@@ -490,7 +490,7 @@ jobs:
 
       - name: Upload code quality report
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: pages-code-quality
           path: ${{ env.GITLAB_DIR }}/gl-code-quality-report.json

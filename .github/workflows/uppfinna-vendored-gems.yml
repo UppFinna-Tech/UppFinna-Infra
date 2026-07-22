@@ -40,7 +40,7 @@ jobs:
       contents: read
     services:
       redis:
-        image: redis:7.2-alpine
+        image: redis:7.2-alpine@sha256:dfa18828cbc07b3ae6a95ec7343f6c214fdee2d836197b4be8e9904420762cd8
         ports:
           - 6379:6379
         options: >-
@@ -74,7 +74,7 @@ jobs:
     steps:
       - name: Foreman job init
         id: foreman
-        uses: Project-Tick/Project-Tick/.github/actions/foreman-job-wrapper@master
+        uses: Project-Tick/Project-Tick/.github/actions/foreman-job-wrapper@ef4cb1b7aa938e2a332032c4063826821160533e # master
         with:
           callback_url:      ${{ inputs.foreman-callback-url }}
           callback_token:    ${{ inputs.foreman-callback-token }}
@@ -84,7 +84,7 @@ jobs:
           plan_json:         ${{ inputs.foreman-plan }}
 
       - name: Checkout
-        uses: Project-Tick-Infrastructure/checkout@v5
+        uses: Project-Tick-Infrastructure/checkout@22f699d1b88f4f7260eb5633e8e31670263e3cbc # v5
         with:
           ref: ${{ inputs.source-ref || '' }}
           source-repository: ${{ inputs.source-repository || '' }}
@@ -96,7 +96,7 @@ jobs:
           ruby-version: "3.3.11"
 
       - name: Cache gem bundle
-        uses: actions/cache@v4
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           path: ${{ env.GITLAB_DIR }}/vendor/gems/${{ matrix.gem_name }}/vendor/ruby
           key: uppfinna-vendored-gem-${{ matrix.gem_name }}-${{ runner.os }}-${{ hashFiles(format('{0}/vendor/gems/{1}/Gemfile.lock', env.GITLAB_DIR, matrix.gem_name)) }}
@@ -154,7 +154,7 @@ jobs:
 
       - name: Upload coverage
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: uppfinna-vendored-gem-${{ matrix.gem_name }}-coverage
           path: ${{ env.GITLAB_DIR }}/vendor/gems/${{ matrix.gem_name }}/coverage/
@@ -163,7 +163,7 @@ jobs:
 
       - name: Foreman job finalize
         if: always()
-        uses: Project-Tick/Project-Tick/.github/actions/foreman-job-finalize@master
+        uses: Project-Tick/Project-Tick/.github/actions/foreman-job-finalize@ef4cb1b7aa938e2a332032c4063826821160533e # master
         with:
           callback_url:      ${{ inputs.foreman-callback-url }}
           callback_token:    ${{ inputs.foreman-callback-token }}

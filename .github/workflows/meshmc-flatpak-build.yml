@@ -81,7 +81,7 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     container:
-      image: ghcr.io/flathub-infra/flatpak-github-actions:kde-6.10
+      image: ghcr.io/flathub-infra/flatpak-github-actions:kde-6.10@sha256:acd1625e947d2578ffe1b9247c8ea40d4f6310e532e6a1f844b0c1b486c5d547
       options: --privileged
       volumes:
         - /opt/hostedtoolcache:/hostedtoolcache
@@ -94,7 +94,7 @@ jobs:
     steps:
       - name: Foreman job init
         id: foreman
-        uses: Project-Tick/Project-Tick/.github/actions/foreman-job-wrapper@master
+        uses: Project-Tick/Project-Tick/.github/actions/foreman-job-wrapper@ef4cb1b7aa938e2a332032c4063826821160533e # master
         with:
           callback_url:      ${{ inputs.foreman-callback-url }}
           callback_token:    ${{ inputs.foreman-callback-token }}
@@ -109,7 +109,7 @@ jobs:
           rm -rf /hostedtoolcache/*
 
       - name: Checkout repository
-        uses: Project-Tick-Infrastructure/checkout@v5
+        uses: Project-Tick-Infrastructure/checkout@22f699d1b88f4f7260eb5633e8e31670263e3cbc # v5
         with:
           source-repository: ${{ inputs.source-repository || '' }}
           show-progress: 'false'
@@ -130,7 +130,7 @@ jobs:
       - name: Restore local repository
         id: restore-repository
         if: ${{ inputs.cache-repository }}
-        uses: actions/cache/restore@v6
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
         with:
           path: ${{ env.REPOSITORY_PATH }}
           key: repository-${{ github.run_id }}-${{ runner.arch }}
@@ -177,13 +177,13 @@ jobs:
 
       - name: Cache local repository
         if: ${{ inputs.cache-repository }}
-        uses: actions/cache/save@v6
+        uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
         with:
           path: ${{ env.REPOSITORY_PATH }}
           key: ${{ steps.restore-repository.outputs.cache-primary-key }}
       - name: Foreman job finalize
         if: always()
-        uses: Project-Tick/Project-Tick/.github/actions/foreman-job-finalize@master
+        uses: Project-Tick/Project-Tick/.github/actions/foreman-job-finalize@ef4cb1b7aa938e2a332032c4063826821160533e # master
         with:
           callback_url:      ${{ inputs.foreman-callback-url }}
           callback_token:    ${{ inputs.foreman-callback-token }}

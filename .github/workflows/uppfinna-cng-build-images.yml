@@ -68,12 +68,12 @@ jobs:
         image: [gitlab-go, gitlab-rust]
         arch: [amd64, arm64]
     steps:
-      - uses: Project-Tick-Infrastructure/checkout@v5
+      - uses: Project-Tick-Infrastructure/checkout@22f699d1b88f4f7260eb5633e8e31670263e3cbc # v5
         with:
           source-repository: ${{ inputs.cng-repository != '' && inputs.cng-repository || 'https://git.projecttick.org/project-tick/uppfinna/cng' }}
           source-ref: ${{ inputs.cng-ref || 'master' }}
           submodules: true
-      - uses: Project-Tick/Project-Tick/.github/actions/uppfinna-cng-image@master
+      - uses: Project-Tick/Project-Tick/.github/actions/uppfinna-cng-image@ef4cb1b7aa938e2a332032c4063826821160533e # master
         with:
           image: ${{ matrix.image }}
           mode: build
@@ -108,12 +108,12 @@ jobs:
       matrix:
         image: [gitlab-go, gitlab-rust]
     steps:
-      - uses: Project-Tick-Infrastructure/checkout@v5
+      - uses: Project-Tick-Infrastructure/checkout@22f699d1b88f4f7260eb5633e8e31670263e3cbc # v5
         with:
           source-repository: ${{ inputs.cng-repository != '' && inputs.cng-repository || 'https://git.projecttick.org/project-tick/uppfinna/cng' }}
           source-ref: ${{ inputs.cng-ref || 'master' }}
           submodules: true
-      - uses: Project-Tick/Project-Tick/.github/actions/uppfinna-cng-image@master
+      - uses: Project-Tick/Project-Tick/.github/actions/uppfinna-cng-image@ef4cb1b7aa938e2a332032c4063826821160533e # master
         with:
           image: ${{ matrix.image }}
           mode: merge
@@ -152,12 +152,12 @@ jobs:
         image: [gitlab-logger, gitlab-gomplate, gitlab-graphicsmagick, gitlab-python, postgresql, cfssl-self-sign, kubectl]
         arch: [amd64, arm64]
     steps:
-      - uses: Project-Tick-Infrastructure/checkout@v5
+      - uses: Project-Tick-Infrastructure/checkout@22f699d1b88f4f7260eb5633e8e31670263e3cbc # v5
         with:
           source-repository: ${{ inputs.cng-repository != '' && inputs.cng-repository || 'https://git.projecttick.org/project-tick/uppfinna/cng' }}
           source-ref: ${{ inputs.cng-ref || 'master' }}
           submodules: true
-      - uses: Project-Tick/Project-Tick/.github/actions/uppfinna-cng-image@master
+      - uses: Project-Tick/Project-Tick/.github/actions/uppfinna-cng-image@ef4cb1b7aa938e2a332032c4063826821160533e # master
         with:
           image: ${{ matrix.image }}
           mode: build
@@ -192,12 +192,12 @@ jobs:
       matrix:
         image: [gitlab-logger, gitlab-gomplate, gitlab-graphicsmagick, gitlab-python, postgresql, cfssl-self-sign, kubectl]
     steps:
-      - uses: Project-Tick-Infrastructure/checkout@v5
+      - uses: Project-Tick-Infrastructure/checkout@22f699d1b88f4f7260eb5633e8e31670263e3cbc # v5
         with:
           source-repository: ${{ inputs.cng-repository != '' && inputs.cng-repository || 'https://git.projecttick.org/project-tick/uppfinna/cng' }}
           source-ref: ${{ inputs.cng-ref || 'master' }}
           submodules: true
-      - uses: Project-Tick/Project-Tick/.github/actions/uppfinna-cng-image@master
+      - uses: Project-Tick/Project-Tick/.github/actions/uppfinna-cng-image@ef4cb1b7aa938e2a332032c4063826821160533e # master
         with:
           image: ${{ matrix.image }}
           mode: merge
@@ -235,12 +235,12 @@ jobs:
       matrix:
         arch: [amd64, arm64]
     steps:
-      - uses: Project-Tick-Infrastructure/checkout@v5
+      - uses: Project-Tick-Infrastructure/checkout@22f699d1b88f4f7260eb5633e8e31670263e3cbc # v5
         with:
           source-repository: ${{ inputs.cng-repository != '' && inputs.cng-repository || 'https://git.projecttick.org/project-tick/uppfinna/cng' }}
           source-ref: ${{ inputs.cng-ref || 'master' }}
           submodules: true
-      - uses: Project-Tick/Project-Tick/.github/actions/uppfinna-cng-image@master
+      - uses: Project-Tick/Project-Tick/.github/actions/uppfinna-cng-image@ef4cb1b7aa938e2a332032c4063826821160533e # master
         with:
           image: gitlab-base
           mode: build
@@ -267,12 +267,12 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: Project-Tick-Infrastructure/checkout@v5
+      - uses: Project-Tick-Infrastructure/checkout@22f699d1b88f4f7260eb5633e8e31670263e3cbc # v5
         with:
           source-repository: ${{ inputs.cng-repository != '' && inputs.cng-repository || 'https://git.projecttick.org/project-tick/uppfinna/cng' }}
           source-ref: ${{ inputs.cng-ref || 'master' }}
           submodules: true
-      - uses: Project-Tick/Project-Tick/.github/actions/uppfinna-cng-image@master
+      - uses: Project-Tick/Project-Tick/.github/actions/uppfinna-cng-image@ef4cb1b7aa938e2a332032c4063826821160533e # master
         with:
           image: gitlab-base
           mode: merge
@@ -305,12 +305,12 @@ jobs:
         image: [certificates, gitlab-exiftool, gitlab-cosign, gitlab-ruby]
         arch: [amd64, arm64]
     steps:
-      - uses: Project-Tick-Infrastructure/checkout@v5
+      - uses: Project-Tick-Infrastructure/checkout@22f699d1b88f4f7260eb5633e8e31670263e3cbc # v5
         with:
           source-repository: ${{ inputs.cng-repository != '' && inputs.cng-repository || 'https://git.projecttick.org/project-tick/uppfinna/cng' }}
           source-ref: ${{ inputs.cng-ref || 'master' }}
           submodules: true
-      - uses: Project-Tick/Project-Tick/.github/actions/uppfinna-cng-image@master
+      - uses: Project-Tick/Project-Tick/.github/actions/uppfinna-cng-image@ef4cb1b7aa938e2a332032c4063826821160533e # master
         with:
           image: ${{ matrix.image }}
           mode: build
@@ -340,12 +340,12 @@ jobs:
       matrix:
         image: [certificates, gitlab-exiftool, gitlab-cosign, gitlab-ruby]
     steps:
-      - uses: Project-Tick-Infrastructure/checkout@v5
+      - uses: Project-Tick-Infrastructure/checkout@22f699d1b88f4f7260eb5633e8e31670263e3cbc # v5
         with:
           source-repository: ${{ inputs.cng-repository != '' && inputs.cng-repository || 'https://git.projecttick.org/project-tick/uppfinna/cng' }}
           source-ref: ${{ inputs.cng-ref || 'master' }}
           submodules: true
-      - uses: Project-Tick/Project-Tick/.github/actions/uppfinna-cng-image@master
+      - uses: Project-Tick/Project-Tick/.github/actions/uppfinna-cng-image@ef4cb1b7aa938e2a332032c4063826821160533e # master
         with:
           image: ${{ matrix.image }}
           mode: merge
@@ -379,12 +379,12 @@ jobs:
         image: [gitlab-exporter, gitlab-mailroom, gitaly, gitlab-container-registry, gitlab-kas, gitlab-pages, gitlab-shell, gitlab-agentk, gitlab-openbao, gitlab-zoekt, gitlab-elasticsearch-indexer]
         arch: [amd64, arm64]
     steps:
-      - uses: Project-Tick-Infrastructure/checkout@v5
+      - uses: Project-Tick-Infrastructure/checkout@22f699d1b88f4f7260eb5633e8e31670263e3cbc # v5
         with:
           source-repository: ${{ inputs.cng-repository != '' && inputs.cng-repository || 'https://git.projecttick.org/project-tick/uppfinna/cng' }}
           source-ref: ${{ inputs.cng-ref || 'master' }}
           submodules: true
-      - uses: Project-Tick/Project-Tick/.github/actions/uppfinna-cng-image@master
+      - uses: Project-Tick/Project-Tick/.github/actions/uppfinna-cng-image@ef4cb1b7aa938e2a332032c4063826821160533e # master
         with:
           image: ${{ matrix.image }}
           mode: build
@@ -420,12 +420,12 @@ jobs:
       matrix:
         image: [gitlab-exporter, gitlab-mailroom, gitaly, gitlab-container-registry, gitlab-kas, gitlab-pages, gitlab-shell, gitlab-agentk, gitlab-openbao, gitlab-zoekt, gitlab-elasticsearch-indexer]
     steps:
-      - uses: Project-Tick-Infrastructure/checkout@v5
+      - uses: Project-Tick-Infrastructure/checkout@22f699d1b88f4f7260eb5633e8e31670263e3cbc # v5
         with:
           source-repository: ${{ inputs.cng-repository != '' && inputs.cng-repository || 'https://git.projecttick.org/project-tick/uppfinna/cng' }}
           source-ref: ${{ inputs.cng-ref || 'master' }}
           submodules: true
-      - uses: Project-Tick/Project-Tick/.github/actions/uppfinna-cng-image@master
+      - uses: Project-Tick/Project-Tick/.github/actions/uppfinna-cng-image@ef4cb1b7aa938e2a332032c4063826821160533e # master
         with:
           image: ${{ matrix.image }}
           mode: merge
@@ -462,12 +462,12 @@ jobs:
       matrix:
         arch: [amd64, arm64]
     steps:
-      - uses: Project-Tick-Infrastructure/checkout@v5
+      - uses: Project-Tick-Infrastructure/checkout@22f699d1b88f4f7260eb5633e8e31670263e3cbc # v5
         with:
           source-repository: ${{ inputs.cng-repository != '' && inputs.cng-repository || 'https://git.projecttick.org/project-tick/uppfinna/cng' }}
           source-ref: ${{ inputs.cng-ref || 'master' }}
           submodules: true
-      - uses: Project-Tick/Project-Tick/.github/actions/uppfinna-cng-image@master
+      - uses: Project-Tick/Project-Tick/.github/actions/uppfinna-cng-image@ef4cb1b7aa938e2a332032c4063826821160533e # master
         with:
           image: gitaly-init-cgroups
           mode: build
@@ -494,12 +494,12 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: Project-Tick-Infrastructure/checkout@v5
+      - uses: Project-Tick-Infrastructure/checkout@22f699d1b88f4f7260eb5633e8e31670263e3cbc # v5
         with:
           source-repository: ${{ inputs.cng-repository != '' && inputs.cng-repository || 'https://git.projecttick.org/project-tick/uppfinna/cng' }}
           source-ref: ${{ inputs.cng-ref || 'master' }}
           submodules: true
-      - uses: Project-Tick/Project-Tick/.github/actions/uppfinna-cng-image@master
+      - uses: Project-Tick/Project-Tick/.github/actions/uppfinna-cng-image@ef4cb1b7aa938e2a332032c4063826821160533e # master
         with:
           image: gitaly-init-cgroups
           mode: merge
@@ -532,12 +532,12 @@ jobs:
       matrix:
         arch: [amd64, arm64]
     steps:
-      - uses: Project-Tick-Infrastructure/checkout@v5
+      - uses: Project-Tick-Infrastructure/checkout@22f699d1b88f4f7260eb5633e8e31670263e3cbc # v5
         with:
           source-repository: ${{ inputs.cng-repository != '' && inputs.cng-repository || 'https://git.projecttick.org/project-tick/uppfinna/cng' }}
           source-ref: ${{ inputs.cng-ref || 'master' }}
           submodules: true
-      - uses: Project-Tick/Project-Tick/.github/actions/uppfinna-cng-image@master
+      - uses: Project-Tick/Project-Tick/.github/actions/uppfinna-cng-image@ef4cb1b7aa938e2a332032c4063826821160533e # master
         with:
           image: gitlab-rails-ce
           mode: build
@@ -564,12 +564,12 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: Project-Tick-Infrastructure/checkout@v5
+      - uses: Project-Tick-Infrastructure/checkout@22f699d1b88f4f7260eb5633e8e31670263e3cbc # v5
         with:
           source-repository: ${{ inputs.cng-repository != '' && inputs.cng-repository || 'https://git.projecttick.org/project-tick/uppfinna/cng' }}
           source-ref: ${{ inputs.cng-ref || 'master' }}
           submodules: true
-      - uses: Project-Tick/Project-Tick/.github/actions/uppfinna-cng-image@master
+      - uses: Project-Tick/Project-Tick/.github/actions/uppfinna-cng-image@ef4cb1b7aa938e2a332032c4063826821160533e # master
         with:
           image: gitlab-rails-ce
           mode: merge
@@ -602,12 +602,12 @@ jobs:
         image: [gitlab-sidekiq-ce, gitlab-toolbox-ce, gitlab-webservice-ce, gitlab-workhorse-ce]
         arch: [amd64, arm64]
     steps:
-      - uses: Project-Tick-Infrastructure/checkout@v5
+      - uses: Project-Tick-Infrastructure/checkout@22f699d1b88f4f7260eb5633e8e31670263e3cbc # v5
         with:
           source-repository: ${{ inputs.cng-repository != '' && inputs.cng-repository || 'https://git.projecttick.org/project-tick/uppfinna/cng' }}
           source-ref: ${{ inputs.cng-ref || 'master' }}
           submodules: true
-      - uses: Project-Tick/Project-Tick/.github/actions/uppfinna-cng-image@master
+      - uses: Project-Tick/Project-Tick/.github/actions/uppfinna-cng-image@ef4cb1b7aa938e2a332032c4063826821160533e # master
         with:
           image: ${{ matrix.image }}
           mode: build
@@ -637,12 +637,12 @@ jobs:
       matrix:
         image: [gitlab-sidekiq-ce, gitlab-toolbox-ce, gitlab-webservice-ce, gitlab-workhorse-ce]
     steps:
-      - uses: Project-Tick-Infrastructure/checkout@v5
+      - uses: Project-Tick-Infrastructure/checkout@22f699d1b88f4f7260eb5633e8e31670263e3cbc # v5
         with:
           source-repository: ${{ inputs.cng-repository != '' && inputs.cng-repository || 'https://git.projecttick.org/project-tick/uppfinna/cng' }}
           source-ref: ${{ inputs.cng-ref || 'master' }}
           submodules: true
-      - uses: Project-Tick/Project-Tick/.github/actions/uppfinna-cng-image@master
+      - uses: Project-Tick/Project-Tick/.github/actions/uppfinna-cng-image@ef4cb1b7aa938e2a332032c4063826821160533e # master
         with:
           image: ${{ matrix.image }}
           mode: merge

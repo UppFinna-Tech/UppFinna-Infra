@@ -40,19 +40,19 @@ runs:
   steps:
     - name: Setup Linux dependencies
       if: ${{ runner.os == 'Linux' }}
-      uses: Project-Tick/Project-Tick/.github/actions/meshmc/setup-dependencies/linux@master
+      uses: Project-Tick/Project-Tick/.github/actions/meshmc/setup-dependencies/linux@ef4cb1b7aa938e2a332032c4063826821160533e # master
       with:
         github-token: ${{ inputs.github-token }}
 
     - name: Setup macOS dependencies
       if: ${{ runner.os == 'macOS' }}
-      uses: Project-Tick/Project-Tick/.github/actions/meshmc/setup-dependencies/macos@master
+      uses: Project-Tick/Project-Tick/.github/actions/meshmc/setup-dependencies/macos@ef4cb1b7aa938e2a332032c4063826821160533e # master
       with:
         build-type: ${{ inputs.build-type }}
 
     - name: Setup Windows dependencies
       if: ${{ runner.os == 'Windows' }}
-      uses: Project-Tick/Project-Tick/.github/actions/meshmc/setup-dependencies/windows@master
+      uses: Project-Tick/Project-Tick/.github/actions/meshmc/setup-dependencies/windows@ef4cb1b7aa938e2a332032c4063826821160533e # master
       with:
         build-type: ${{ inputs.build-type }}
         msystem: ${{ inputs.msystem }}
@@ -61,7 +61,7 @@ runs:
     # TODO(@YongDo-Hyun): Get this working on MSYS2!
     - name: Setup ccache
       if: ${{ (runner.os != 'Windows' || inputs.msystem == '') && inputs.build-type == 'Debug' }}
-      uses: hendrikmuhs/ccache-action@v1.2.23
+      uses: hendrikmuhs/ccache-action@d62db5f07c26379fc4b4e0916f098a92573c3b03 # v1.2.23
       with:
         variant: sccache
         create-symlink: ${{ runner.os != 'Windows' }}

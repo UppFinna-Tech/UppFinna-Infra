@@ -188,7 +188,7 @@ jobs:
     needs: callback-start
     runs-on: ubuntu-24.04
     container:
-      image: registry.gitlab.com/gitlab-org/gitlab-build-images/debian-bookworm-ruby-3.3.11-golang-1.25-rust-1.89:rubygems-3.6-git-2.51-exiftool-12.60
+      image: registry.gitlab.com/gitlab-org/gitlab-build-images/debian-bookworm-ruby-3.3.11-golang-1.25-rust-1.89:rubygems-3.6-git-2.51-exiftool-12.60@sha256:9d427d7bce8b3b7f2061681fefe84227feb79fd6051f81ea30aeca8c750e9690
     permissions:
       contents: read
     strategy:
@@ -208,7 +208,7 @@ jobs:
         run: command -v jq >/dev/null 2>&1 || { apt-get update -qq && apt-get install -y --no-install-recommends jq; }
 
       - name: Foreman job init
-        uses: Project-Tick/Project-Tick/.github/actions/foreman-job-wrapper@master
+        uses: Project-Tick/Project-Tick/.github/actions/foreman-job-wrapper@ef4cb1b7aa938e2a332032c4063826821160533e # master
         with:
           callback_url:      ${{ needs.callback-start.outputs.callback_url }}
           callback_token:    ${{ needs.callback-start.outputs.cb_auth }}
@@ -218,14 +218,14 @@ jobs:
           plan_json:         ${{ inputs.foreman-plan }}
 
       - name: Checkout
-        uses: Project-Tick-Infrastructure/checkout@v5
+        uses: Project-Tick-Infrastructure/checkout@22f699d1b88f4f7260eb5633e8e31670263e3cbc # v5
         with:
           ref: ${{ inputs.source-ref || '' }}
           source-repository: ${{ inputs.source-repository || '' }}
           submodules: true
 
       - name: Cache Go modules
-        uses: actions/cache@v4
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           path: |
             ~/go/pkg/mod
@@ -245,7 +245,7 @@ jobs:
 
       - name: Upload coverage report
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: shell-cover-${{ matrix.go_version }}
           path: ${{ env.GITLAB_DIR }}/cover.xml
@@ -254,7 +254,7 @@ jobs:
 
       - name: Foreman job finalize
         if: always()
-        uses: Project-Tick/Project-Tick/.github/actions/foreman-job-finalize@master
+        uses: Project-Tick/Project-Tick/.github/actions/foreman-job-finalize@ef4cb1b7aa938e2a332032c4063826821160533e # master
         with:
           callback_url:      ${{ needs.callback-start.outputs.callback_url }}
           callback_token:    ${{ needs.callback-start.outputs.cb_auth }}
@@ -268,7 +268,7 @@ jobs:
     needs: callback-start
     runs-on: ubuntu-24.04
     container:
-      image: registry.gitlab.com/gitlab-org/gitlab-build-images/debian-bookworm-ruby-3.3.11-golang-1.25-rust-1.89:rubygems-3.6-git-2.51-exiftool-12.60
+      image: registry.gitlab.com/gitlab-org/gitlab-build-images/debian-bookworm-ruby-3.3.11-golang-1.25-rust-1.89:rubygems-3.6-git-2.51-exiftool-12.60@sha256:9d427d7bce8b3b7f2061681fefe84227feb79fd6051f81ea30aeca8c750e9690
     permissions:
       contents: read
     strategy:
@@ -287,7 +287,7 @@ jobs:
         run: command -v jq >/dev/null 2>&1 || { apt-get update -qq && apt-get install -y --no-install-recommends jq; }
 
       - name: Foreman job init
-        uses: Project-Tick/Project-Tick/.github/actions/foreman-job-wrapper@master
+        uses: Project-Tick/Project-Tick/.github/actions/foreman-job-wrapper@ef4cb1b7aa938e2a332032c4063826821160533e # master
         with:
           callback_url:      ${{ needs.callback-start.outputs.callback_url }}
           callback_token:    ${{ needs.callback-start.outputs.cb_auth }}
@@ -297,14 +297,14 @@ jobs:
           plan_json:         ${{ inputs.foreman-plan }}
 
       - name: Checkout
-        uses: Project-Tick-Infrastructure/checkout@v5
+        uses: Project-Tick-Infrastructure/checkout@22f699d1b88f4f7260eb5633e8e31670263e3cbc # v5
         with:
           ref: ${{ inputs.source-ref || '' }}
           source-repository: ${{ inputs.source-repository || '' }}
           submodules: true
 
       - name: Cache Go modules
-        uses: actions/cache@v4
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           path: |
             ~/go/pkg/mod
@@ -318,7 +318,7 @@ jobs:
 
       - name: Foreman job finalize
         if: always()
-        uses: Project-Tick/Project-Tick/.github/actions/foreman-job-finalize@master
+        uses: Project-Tick/Project-Tick/.github/actions/foreman-job-finalize@ef4cb1b7aa938e2a332032c4063826821160533e # master
         with:
           callback_url:      ${{ needs.callback-start.outputs.callback_url }}
           callback_token:    ${{ needs.callback-start.outputs.cb_auth }}
@@ -332,7 +332,7 @@ jobs:
     needs: callback-start
     runs-on: ubuntu-24.04
     container:
-      image: registry.gitlab.com/gitlab-org/gitlab-build-images/debian-bookworm-ruby-3.3.11-golang-1.25-rust-1.89:rubygems-3.6-git-2.51-exiftool-12.60
+      image: registry.gitlab.com/gitlab-org/gitlab-build-images/debian-bookworm-ruby-3.3.11-golang-1.25-rust-1.89:rubygems-3.6-git-2.51-exiftool-12.60@sha256:9d427d7bce8b3b7f2061681fefe84227feb79fd6051f81ea30aeca8c750e9690
     permissions:
       contents: read
     strategy:
@@ -351,7 +351,7 @@ jobs:
         run: command -v jq >/dev/null 2>&1 || { apt-get update -qq && apt-get install -y --no-install-recommends jq; }
 
       - name: Foreman job init
-        uses: Project-Tick/Project-Tick/.github/actions/foreman-job-wrapper@master
+        uses: Project-Tick/Project-Tick/.github/actions/foreman-job-wrapper@ef4cb1b7aa938e2a332032c4063826821160533e # master
         with:
           callback_url:      ${{ needs.callback-start.outputs.callback_url }}
           callback_token:    ${{ needs.callback-start.outputs.cb_auth }}
@@ -361,14 +361,14 @@ jobs:
           plan_json:         ${{ inputs.foreman-plan }}
 
       - name: Checkout
-        uses: Project-Tick-Infrastructure/checkout@v5
+        uses: Project-Tick-Infrastructure/checkout@22f699d1b88f4f7260eb5633e8e31670263e3cbc # v5
         with:
           ref: ${{ inputs.source-ref || '' }}
           source-repository: ${{ inputs.source-repository || '' }}
           submodules: true
 
       - name: Cache Go modules
-        uses: actions/cache@v4
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           path: |
             ~/go/pkg/mod
@@ -382,7 +382,7 @@ jobs:
 
       - name: Foreman job finalize
         if: always()
-        uses: Project-Tick/Project-Tick/.github/actions/foreman-job-finalize@master
+        uses: Project-Tick/Project-Tick/.github/actions/foreman-job-finalize@ef4cb1b7aa938e2a332032c4063826821160533e # master
         with:
           callback_url:      ${{ needs.callback-start.outputs.callback_url }}
           callback_token:    ${{ needs.callback-start.outputs.cb_auth }}
@@ -396,7 +396,7 @@ jobs:
     needs: callback-start
     runs-on: ubuntu-24.04
     container:
-      image: registry.gitlab.com/gitlab-org/gitlab-build-images/debian-bookworm-ruby-3.3.11-golang-1.25-rust-1.89:rubygems-3.6-git-2.51-exiftool-12.60
+      image: registry.gitlab.com/gitlab-org/gitlab-build-images/debian-bookworm-ruby-3.3.11-golang-1.25-rust-1.89:rubygems-3.6-git-2.51-exiftool-12.60@sha256:9d427d7bce8b3b7f2061681fefe84227feb79fd6051f81ea30aeca8c750e9690
     permissions:
       contents: read
     env:
@@ -411,7 +411,7 @@ jobs:
         run: command -v jq >/dev/null 2>&1 || { apt-get update -qq && apt-get install -y --no-install-recommends jq; }
 
       - name: Foreman job init
-        uses: Project-Tick/Project-Tick/.github/actions/foreman-job-wrapper@master
+        uses: Project-Tick/Project-Tick/.github/actions/foreman-job-wrapper@ef4cb1b7aa938e2a332032c4063826821160533e # master
         with:
           callback_url:      ${{ needs.callback-start.outputs.callback_url }}
           callback_token:    ${{ needs.callback-start.outputs.cb_auth }}
@@ -421,14 +421,14 @@ jobs:
           plan_json:         ${{ inputs.foreman-plan }}
 
       - name: Checkout
-        uses: Project-Tick-Infrastructure/checkout@v5
+        uses: Project-Tick-Infrastructure/checkout@22f699d1b88f4f7260eb5633e8e31670263e3cbc # v5
         with:
           ref: ${{ inputs.source-ref || '' }}
           source-repository: ${{ inputs.source-repository || '' }}
           submodules: true
 
       - name: Cache Go modules
-        uses: actions/cache@v4
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           path: |
             ~/go/pkg/mod
@@ -446,7 +446,7 @@ jobs:
 
       - name: Foreman job finalize
         if: always()
-        uses: Project-Tick/Project-Tick/.github/actions/foreman-job-finalize@master
+        uses: Project-Tick/Project-Tick/.github/actions/foreman-job-finalize@ef4cb1b7aa938e2a332032c4063826821160533e # master
         with:
           callback_url:      ${{ needs.callback-start.outputs.callback_url }}
           callback_token:    ${{ needs.callback-start.outputs.cb_auth }}

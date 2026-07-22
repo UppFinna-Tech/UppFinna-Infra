@@ -65,7 +65,7 @@ jobs:
     steps:
       - name: Foreman job init
         id: foreman
-        uses: Project-Tick/Project-Tick/.github/actions/foreman-job-wrapper@master
+        uses: Project-Tick/Project-Tick/.github/actions/foreman-job-wrapper@ef4cb1b7aa938e2a332032c4063826821160533e # master
         with:
           callback_url:      ${{ inputs.foreman-callback-url }}
           callback_token:    ${{ inputs.foreman-callback-token }}
@@ -129,7 +129,7 @@ jobs:
 
       - name: Foreman job finalize
         if: always()
-        uses: Project-Tick/Project-Tick/.github/actions/foreman-job-finalize@master
+        uses: Project-Tick/Project-Tick/.github/actions/foreman-job-finalize@ef4cb1b7aa938e2a332032c4063826821160533e # master
         with:
           callback_url:      ${{ inputs.foreman-callback-url }}
           callback_token:    ${{ inputs.foreman-callback-token }}

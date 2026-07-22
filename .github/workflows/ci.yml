@@ -316,13 +316,13 @@ jobs:
 
     steps:
       - name: Harden runner
-        uses: step-security/harden-runner@v2
+        uses: step-security/harden-runner@bf7454d06d71f1098171f2acdf0cd4708d7b5920 # v2
         with:
           egress-policy: audit
 
       - name: Report Gate job started
         if: needs.callback-start.outputs.pipeline_id != ''
-        uses: Project-Tick/Project-Tick/.github/actions/foreman-job-callback@master
+        uses: Project-Tick/Project-Tick/.github/actions/foreman-job-callback@ef4cb1b7aa938e2a332032c4063826821160533e # master
         with:
           pipeline_id: ${{ needs.callback-start.outputs.pipeline_id }}
           foreman_api_token: ${{ secrets.FOREMAN_API_TOKEN || '' }}
@@ -517,7 +517,7 @@ jobs:
 
       - name: Report Gate job completed
         if: always() && needs.callback-start.outputs.pipeline_id != ''
-        uses: Project-Tick/Project-Tick/.github/actions/foreman-job-callback@master
+        uses: Project-Tick/Project-Tick/.github/actions/foreman-job-callback@ef4cb1b7aa938e2a332032c4063826821160533e # master
         with:
           pipeline_id: ${{ needs.callback-start.outputs.pipeline_id }}
           foreman_api_token: ${{ secrets.FOREMAN_API_TOKEN || '' }}
@@ -1041,7 +1041,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions: {}
     steps:
-      - uses: Project-Tick/Project-Tick/.github/actions/foreman-job-callback@master
+      - uses: Project-Tick/Project-Tick/.github/actions/foreman-job-callback@ef4cb1b7aa938e2a332032c4063826821160533e # master
         with:
           pipeline_id: ${{ needs.callback-start.outputs.pipeline_id }}
           foreman_api_token: ${{ secrets.FOREMAN_API_TOKEN || '' }}
@@ -1056,7 +1056,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions: {}
     steps:
-      - uses: Project-Tick/Project-Tick/.github/actions/foreman-job-callback@master
+      - uses: Project-Tick/Project-Tick/.github/actions/foreman-job-callback@ef4cb1b7aa938e2a332032c4063826821160533e # master
         with:
           pipeline_id: ${{ needs.callback-start.outputs.pipeline_id }}
           foreman_api_token: ${{ secrets.FOREMAN_API_TOKEN || '' }}
@@ -1071,7 +1071,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions: {}
     steps:
-      - uses: Project-Tick/Project-Tick/.github/actions/foreman-job-callback@master
+      - uses: Project-Tick/Project-Tick/.github/actions/foreman-job-callback@ef4cb1b7aa938e2a332032c4063826821160533e # master
         with:
           pipeline_id: ${{ needs.callback-start.outputs.pipeline_id }}
           foreman_api_token: ${{ secrets.FOREMAN_API_TOKEN || '' }}
@@ -1086,7 +1086,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions: {}
     steps:
-      - uses: Project-Tick/Project-Tick/.github/actions/foreman-job-callback@master
+      - uses: Project-Tick/Project-Tick/.github/actions/foreman-job-callback@ef4cb1b7aa938e2a332032c4063826821160533e # master
         with:
           pipeline_id: ${{ needs.callback-start.outputs.pipeline_id }}
           foreman_api_token: ${{ secrets.FOREMAN_API_TOKEN || '' }}
@@ -1101,7 +1101,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions: {}
     steps:
-      - uses: Project-Tick/Project-Tick/.github/actions/foreman-job-callback@master
+      - uses: Project-Tick/Project-Tick/.github/actions/foreman-job-callback@ef4cb1b7aa938e2a332032c4063826821160533e # master
         with:
           pipeline_id: ${{ needs.callback-start.outputs.pipeline_id }}
           foreman_api_token: ${{ secrets.FOREMAN_API_TOKEN || '' }}
@@ -1116,7 +1116,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions: {}
     steps:
-      - uses: Project-Tick/Project-Tick/.github/actions/foreman-job-callback@master
+      - uses: Project-Tick/Project-Tick/.github/actions/foreman-job-callback@ef4cb1b7aa938e2a332032c4063826821160533e # master
         with:
           pipeline_id: ${{ needs.callback-start.outputs.pipeline_id }}
           foreman_api_token: ${{ secrets.FOREMAN_API_TOKEN || '' }}
@@ -1131,7 +1131,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions: {}
     steps:
-      - uses: Project-Tick/Project-Tick/.github/actions/foreman-job-callback@master
+      - uses: Project-Tick/Project-Tick/.github/actions/foreman-job-callback@ef4cb1b7aa938e2a332032c4063826821160533e # master
         with:
           pipeline_id: ${{ needs.callback-start.outputs.pipeline_id }}
           foreman_api_token: ${{ secrets.FOREMAN_API_TOKEN || '' }}
@@ -1146,7 +1146,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions: {}
     steps:
-      - uses: Project-Tick/Project-Tick/.github/actions/foreman-job-callback@master
+      - uses: Project-Tick/Project-Tick/.github/actions/foreman-job-callback@ef4cb1b7aa938e2a332032c4063826821160533e # master
         with:
           pipeline_id: ${{ needs.callback-start.outputs.pipeline_id }}
           foreman_api_token: ${{ secrets.FOREMAN_API_TOKEN || '' }}
@@ -1161,7 +1161,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions: {}
     steps:
-      - uses: Project-Tick/Project-Tick/.github/actions/foreman-job-callback@master
+      - uses: Project-Tick/Project-Tick/.github/actions/foreman-job-callback@ef4cb1b7aa938e2a332032c4063826821160533e # master
         with:
           pipeline_id: ${{ needs.callback-start.outputs.pipeline_id }}
           foreman_api_token: ${{ secrets.FOREMAN_API_TOKEN || '' }}
@@ -1176,7 +1176,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions: {}
     steps:
-      - uses: Project-Tick/Project-Tick/.github/actions/foreman-job-callback@master
+      - uses: Project-Tick/Project-Tick/.github/actions/foreman-job-callback@ef4cb1b7aa938e2a332032c4063826821160533e # master
         with:
           pipeline_id: ${{ needs.callback-start.outputs.pipeline_id }}
           foreman_api_token: ${{ secrets.FOREMAN_API_TOKEN || '' }}
@@ -1191,7 +1191,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions: {}
     steps:
-      - uses: Project-Tick/Project-Tick/.github/actions/foreman-job-callback@master
+      - uses: Project-Tick/Project-Tick/.github/actions/foreman-job-callback@ef4cb1b7aa938e2a332032c4063826821160533e # master
         with:
           pipeline_id: ${{ needs.callback-start.outputs.pipeline_id }}
           foreman_api_token: ${{ secrets.FOREMAN_API_TOKEN || '' }}
@@ -1206,7 +1206,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions: {}
     steps:
-      - uses: Project-Tick/Project-Tick/.github/actions/foreman-job-callback@master
+      - uses: Project-Tick/Project-Tick/.github/actions/foreman-job-callback@ef4cb1b7aa938e2a332032c4063826821160533e # master
         with:
           pipeline_id: ${{ needs.callback-start.outputs.pipeline_id }}
           foreman_api_token: ${{ secrets.FOREMAN_API_TOKEN || '' }}
@@ -1221,7 +1221,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions: {}
     steps:
-      - uses: Project-Tick/Project-Tick/.github/actions/foreman-job-callback@master
+      - uses: Project-Tick/Project-Tick/.github/actions/foreman-job-callback@ef4cb1b7aa938e2a332032c4063826821160533e # master
         with:
           pipeline_id: ${{ needs.callback-start.outputs.pipeline_id }}
           foreman_api_token: ${{ secrets.FOREMAN_API_TOKEN || '' }}
@@ -1236,7 +1236,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions: {}
     steps:
-      - uses: Project-Tick/Project-Tick/.github/actions/foreman-job-callback@master
+      - uses: Project-Tick/Project-Tick/.github/actions/foreman-job-callback@ef4cb1b7aa938e2a332032c4063826821160533e # master
         with:
           pipeline_id: ${{ needs.callback-start.outputs.pipeline_id }}
           foreman_api_token: ${{ secrets.FOREMAN_API_TOKEN || '' }}
@@ -1257,7 +1257,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions: {}
     steps:
-      - uses: Project-Tick/Project-Tick/.github/actions/foreman-job-callback@master
+      - uses: Project-Tick/Project-Tick/.github/actions/foreman-job-callback@ef4cb1b7aa938e2a332032c4063826821160533e # master
         with:
           pipeline_id: ${{ needs.callback-start.outputs.pipeline_id }}
           foreman_api_token: ${{ secrets.FOREMAN_API_TOKEN || '' }}
@@ -1285,7 +1285,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions: {}
     steps:
-      - uses: Project-Tick/Project-Tick/.github/actions/foreman-job-callback@master
+      - uses: Project-Tick/Project-Tick/.github/actions/foreman-job-callback@ef4cb1b7aa938e2a332032c4063826821160533e # master
         with:
           pipeline_id: ${{ needs.callback-start.outputs.pipeline_id }}
           foreman_api_token: ${{ secrets.FOREMAN_API_TOKEN || '' }}
@@ -1335,7 +1335,7 @@ jobs:
     steps:
       - name: Report Verdict job started
         if: needs.callback-start.outputs.pipeline_id != ''
-        uses: Project-Tick/Project-Tick/.github/actions/foreman-job-callback@master
+        uses: Project-Tick/Project-Tick/.github/actions/foreman-job-callback@ef4cb1b7aa938e2a332032c4063826821160533e # master
         with:
           pipeline_id: ${{ needs.callback-start.outputs.pipeline_id }}
           foreman_api_token: ${{ secrets.FOREMAN_API_TOKEN || '' }}
@@ -1406,7 +1406,7 @@ jobs:
 
       - name: Report Verdict job completed
         if: always() && needs.callback-start.outputs.pipeline_id != ''
-        uses: Project-Tick/Project-Tick/.github/actions/foreman-job-callback@master
+        uses: Project-Tick/Project-Tick/.github/actions/foreman-job-callback@ef4cb1b7aa938e2a332032c4063826821160533e # master
         with:
           pipeline_id: ${{ needs.callback-start.outputs.pipeline_id }}
           foreman_api_token: ${{ secrets.FOREMAN_API_TOKEN || '' }}

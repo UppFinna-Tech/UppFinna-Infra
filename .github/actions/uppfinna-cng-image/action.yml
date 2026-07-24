@@ -44,11 +44,11 @@ inputs:
   ce-project:
     default: "gitlab"
   ci-api-v4-url:
-    default: "https://git.projecttick.org/api/v4"
+    default: "https://projecttick.org/api/v4"
   ci-server-fqdn:
-    default: "git.projecttick.org"
+    default: "projecttick.org"
   gitaly-git-repo-url:
-    default: "https://git.projecttick.org/project-tick/uppfinna/forge/git.git"
+    default: "https://projecttick.org/project-tick/uppfinna/forge/git.git"
   assets-image-registry-prefix:
     default: "registry.projecttick.org/project-tick/uppfinna"
 

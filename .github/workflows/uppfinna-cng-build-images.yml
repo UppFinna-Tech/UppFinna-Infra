@@ -70,7 +70,7 @@ jobs:
     steps:
       - uses: Project-Tick-Infrastructure/checkout@v5
         with:
-          source-repository: ${{ inputs.cng-repository != '' && inputs.cng-repository || 'https://git.projecttick.org/project-tick/uppfinna/cng' }}
+          source-repository: ${{ inputs.cng-repository != '' && inputs.cng-repository || 'https://projecttick.org/project-tick/uppfinna/cng' }}
           source-ref: ${{ inputs.cng-ref || 'master' }}
           submodules: true
       - uses: Project-Tick/Project-Tick/.github/actions/uppfinna-cng-image@master
@@ -92,9 +92,9 @@ jobs:
           ci-registry-image: ${{ vars.CNG_REGISTRY_IMAGE || 'registry.projecttick.org/project-tick/uppfinna/cng' }}
           gitlab-namespace: ${{ vars.CNG_GITLAB_NAMESPACE || 'project-tick/uppfinna/forge' }}
           ce-project: ${{ vars.CNG_CE_PROJECT || 'uppfinna-project' }}
-          ci-api-v4-url: ${{ vars.CNG_API_V4_URL || 'https://git.projecttick.org/api/v4' }}
-          ci-server-fqdn: ${{ vars.CNG_SERVER_FQDN || 'git.projecttick.org' }}
-          gitaly-git-repo-url: ${{ vars.CNG_GITALY_GIT_REPO_URL || 'https://git.projecttick.org/project-tick/uppfinna/forge/git.git' }}
+          ci-api-v4-url: ${{ vars.CNG_API_V4_URL || 'https://projecttick.org/api/v4' }}
+          ci-server-fqdn: ${{ vars.CNG_SERVER_FQDN || 'projecttick.org' }}
+          gitaly-git-repo-url: ${{ vars.CNG_GITALY_GIT_REPO_URL || 'https://projecttick.org/project-tick/uppfinna/forge/git.git' }}
           assets-image-registry-prefix: ${{ vars.CNG_ASSETS_IMAGE_REGISTRY_PREFIX || 'registry.projecttick.org/project-tick/uppfinna' }}
 
   phase-zero-merge:
@@ -110,7 +110,7 @@ jobs:
     steps:
       - uses: Project-Tick-Infrastructure/checkout@v5
         with:
-          source-repository: ${{ inputs.cng-repository != '' && inputs.cng-repository || 'https://git.projecttick.org/project-tick/uppfinna/cng' }}
+          source-repository: ${{ inputs.cng-repository != '' && inputs.cng-repository || 'https://projecttick.org/project-tick/uppfinna/cng' }}
           source-ref: ${{ inputs.cng-ref || 'master' }}
           submodules: true
       - uses: Project-Tick/Project-Tick/.github/actions/uppfinna-cng-image@master
@@ -132,9 +132,9 @@ jobs:
           ci-registry-image: ${{ vars.CNG_REGISTRY_IMAGE || 'registry.projecttick.org/project-tick/uppfinna/cng' }}
           gitlab-namespace: ${{ vars.CNG_GITLAB_NAMESPACE || 'project-tick/uppfinna/forge' }}
           ce-project: ${{ vars.CNG_CE_PROJECT || 'uppfinna-project' }}
-          ci-api-v4-url: ${{ vars.CNG_API_V4_URL || 'https://git.projecttick.org/api/v4' }}
-          ci-server-fqdn: ${{ vars.CNG_SERVER_FQDN || 'git.projecttick.org' }}
-          gitaly-git-repo-url: ${{ vars.CNG_GITALY_GIT_REPO_URL || 'https://git.projecttick.org/project-tick/uppfinna/forge/git.git' }}
+          ci-api-v4-url: ${{ vars.CNG_API_V4_URL || 'https://projecttick.org/api/v4' }}
+          ci-server-fqdn: ${{ vars.CNG_SERVER_FQDN || 'projecttick.org' }}
+          gitaly-git-repo-url: ${{ vars.CNG_GITALY_GIT_REPO_URL || 'https://projecttick.org/project-tick/uppfinna/forge/git.git' }}
           assets-image-registry-prefix: ${{ vars.CNG_ASSETS_IMAGE_REGISTRY_PREFIX || 'registry.projecttick.org/project-tick/uppfinna' }}
 
   ##########################################################################
@@ -154,7 +154,7 @@ jobs:
     steps:
       - uses: Project-Tick-Infrastructure/checkout@v5
         with:
-          source-repository: ${{ inputs.cng-repository != '' && inputs.cng-repository || 'https://git.projecttick.org/project-tick/uppfinna/cng' }}
+          source-repository: ${{ inputs.cng-repository != '' && inputs.cng-repository || 'https://projecttick.org/project-tick/uppfinna/cng' }}
           source-ref: ${{ inputs.cng-ref || 'master' }}
           submodules: true
       - uses: Project-Tick/Project-Tick/.github/actions/uppfinna-cng-image@master
@@ -176,9 +176,9 @@ jobs:
           ci-registry-image: ${{ vars.CNG_REGISTRY_IMAGE || 'registry.projecttick.org/project-tick/uppfinna/cng' }}
           gitlab-namespace: ${{ vars.CNG_GITLAB_NAMESPACE || 'project-tick/uppfinna/forge' }}
           ce-project: ${{ vars.CNG_CE_PROJECT || 'uppfinna-project' }}
-          ci-api-v4-url: ${{ vars.CNG_API_V4_URL || 'https://git.projecttick.org/api/v4' }}
-          ci-server-fqdn: ${{ vars.CNG_SERVER_FQDN || 'git.projecttick.org' }}
-          gitaly-git-repo-url: ${{ vars.CNG_GITALY_GIT_REPO_URL || 'https://git.projecttick.org/project-tick/uppfinna/forge/git.git' }}
+          ci-api-v4-url: ${{ vars.CNG_API_V4_URL || 'https://projecttick.org/api/v4' }}
+          ci-server-fqdn: ${{ vars.CNG_SERVER_FQDN || 'projecttick.org' }}
+          gitaly-git-repo-url: ${{ vars.CNG_GITALY_GIT_REPO_URL || 'https://projecttick.org/project-tick/uppfinna/forge/git.git' }}
           assets-image-registry-prefix: ${{ vars.CNG_ASSETS_IMAGE_REGISTRY_PREFIX || 'registry.projecttick.org/project-tick/uppfinna' }}
 
   phase-one-merge:
@@ -194,7 +194,7 @@ jobs:
     steps:
       - uses: Project-Tick-Infrastructure/checkout@v5
         with:
-          source-repository: ${{ inputs.cng-repository != '' && inputs.cng-repository || 'https://git.projecttick.org/project-tick/uppfinna/cng' }}
+          source-repository: ${{ inputs.cng-repository != '' && inputs.cng-repository || 'https://projecttick.org/project-tick/uppfinna/cng' }}
           source-ref: ${{ inputs.cng-ref || 'master' }}
           submodules: true
       - uses: Project-Tick/Project-Tick/.github/actions/uppfinna-cng-image@master
@@ -216,9 +216,9 @@ jobs:
           ci-registry-image: ${{ vars.CNG_REGISTRY_IMAGE || 'registry.projecttick.org/project-tick/uppfinna/cng' }}
           gitlab-namespace: ${{ vars.CNG_GITLAB_NAMESPACE || 'project-tick/uppfinna/forge' }}
           ce-project: ${{ vars.CNG_CE_PROJECT || 'uppfinna-project' }}
-          ci-api-v4-url: ${{ vars.CNG_API_V4_URL || 'https://git.projecttick.org/api/v4' }}
-          ci-server-fqdn: ${{ vars.CNG_SERVER_FQDN || 'git.projecttick.org' }}
-          gitaly-git-repo-url: ${{ vars.CNG_GITALY_GIT_REPO_URL || 'https://git.projecttick.org/project-tick/uppfinna/forge/git.git' }}
+          ci-api-v4-url: ${{ vars.CNG_API_V4_URL || 'https://projecttick.org/api/v4' }}
+          ci-server-fqdn: ${{ vars.CNG_SERVER_FQDN || 'projecttick.org' }}
+          gitaly-git-repo-url: ${{ vars.CNG_GITALY_GIT_REPO_URL || 'https://projecttick.org/project-tick/uppfinna/forge/git.git' }}
           assets-image-registry-prefix: ${{ vars.CNG_ASSETS_IMAGE_REGISTRY_PREFIX || 'registry.projecttick.org/project-tick/uppfinna' }}
 
   ##########################################################################
@@ -237,7 +237,7 @@ jobs:
     steps:
       - uses: Project-Tick-Infrastructure/checkout@v5
         with:
-          source-repository: ${{ inputs.cng-repository != '' && inputs.cng-repository || 'https://git.projecttick.org/project-tick/uppfinna/cng' }}
+          source-repository: ${{ inputs.cng-repository != '' && inputs.cng-repository || 'https://projecttick.org/project-tick/uppfinna/cng' }}
           source-ref: ${{ inputs.cng-ref || 'master' }}
           submodules: true
       - uses: Project-Tick/Project-Tick/.github/actions/uppfinna-cng-image@master
@@ -255,9 +255,9 @@ jobs:
           ci-registry-image: ${{ vars.CNG_REGISTRY_IMAGE || 'registry.projecttick.org/project-tick/uppfinna/cng' }}
           gitlab-namespace: ${{ vars.CNG_GITLAB_NAMESPACE || 'project-tick/uppfinna/forge' }}
           ce-project: ${{ vars.CNG_CE_PROJECT || 'uppfinna-project' }}
-          ci-api-v4-url: ${{ vars.CNG_API_V4_URL || 'https://git.projecttick.org/api/v4' }}
-          ci-server-fqdn: ${{ vars.CNG_SERVER_FQDN || 'git.projecttick.org' }}
-          gitaly-git-repo-url: ${{ vars.CNG_GITALY_GIT_REPO_URL || 'https://git.projecttick.org/project-tick/uppfinna/forge/git.git' }}
+          ci-api-v4-url: ${{ vars.CNG_API_V4_URL || 'https://projecttick.org/api/v4' }}
+          ci-server-fqdn: ${{ vars.CNG_SERVER_FQDN || 'projecttick.org' }}
+          gitaly-git-repo-url: ${{ vars.CNG_GITALY_GIT_REPO_URL || 'https://projecttick.org/project-tick/uppfinna/forge/git.git' }}
           assets-image-registry-prefix: ${{ vars.CNG_ASSETS_IMAGE_REGISTRY_PREFIX || 'registry.projecttick.org/project-tick/uppfinna' }}
 
   phase-two-merge:
@@ -269,7 +269,7 @@ jobs:
     steps:
       - uses: Project-Tick-Infrastructure/checkout@v5
         with:
-          source-repository: ${{ inputs.cng-repository != '' && inputs.cng-repository || 'https://git.projecttick.org/project-tick/uppfinna/cng' }}
+          source-repository: ${{ inputs.cng-repository != '' && inputs.cng-repository || 'https://projecttick.org/project-tick/uppfinna/cng' }}
           source-ref: ${{ inputs.cng-ref || 'master' }}
           submodules: true
       - uses: Project-Tick/Project-Tick/.github/actions/uppfinna-cng-image@master
@@ -285,9 +285,9 @@ jobs:
           ci-registry-image: ${{ vars.CNG_REGISTRY_IMAGE || 'registry.projecttick.org/project-tick/uppfinna/cng' }}
           gitlab-namespace: ${{ vars.CNG_GITLAB_NAMESPACE || 'project-tick/uppfinna/forge' }}
           ce-project: ${{ vars.CNG_CE_PROJECT || 'uppfinna-project' }}
-          ci-api-v4-url: ${{ vars.CNG_API_V4_URL || 'https://git.projecttick.org/api/v4' }}
-          ci-server-fqdn: ${{ vars.CNG_SERVER_FQDN || 'git.projecttick.org' }}
-          gitaly-git-repo-url: ${{ vars.CNG_GITALY_GIT_REPO_URL || 'https://git.projecttick.org/project-tick/uppfinna/forge/git.git' }}
+          ci-api-v4-url: ${{ vars.CNG_API_V4_URL || 'https://projecttick.org/api/v4' }}
+          ci-server-fqdn: ${{ vars.CNG_SERVER_FQDN || 'projecttick.org' }}
+          gitaly-git-repo-url: ${{ vars.CNG_GITALY_GIT_REPO_URL || 'https://projecttick.org/project-tick/uppfinna/forge/git.git' }}
           assets-image-registry-prefix: ${{ vars.CNG_ASSETS_IMAGE_REGISTRY_PREFIX || 'registry.projecttick.org/project-tick/uppfinna' }}
 
   ##########################################################################
@@ -307,7 +307,7 @@ jobs:
     steps:
       - uses: Project-Tick-Infrastructure/checkout@v5
         with:
-          source-repository: ${{ inputs.cng-repository != '' && inputs.cng-repository || 'https://git.projecttick.org/project-tick/uppfinna/cng' }}
+          source-repository: ${{ inputs.cng-repository != '' && inputs.cng-repository || 'https://projecttick.org/project-tick/uppfinna/cng' }}
           source-ref: ${{ inputs.cng-ref || 'master' }}
           submodules: true
       - uses: Project-Tick/Project-Tick/.github/actions/uppfinna-cng-image@master
@@ -324,9 +324,9 @@ jobs:
           ci-registry-image: ${{ vars.CNG_REGISTRY_IMAGE || 'registry.projecttick.org/project-tick/uppfinna/cng' }}
           gitlab-namespace: ${{ vars.CNG_GITLAB_NAMESPACE || 'project-tick/uppfinna/forge' }}
           ce-project: ${{ vars.CNG_CE_PROJECT || 'uppfinna-project' }}
-          ci-api-v4-url: ${{ vars.CNG_API_V4_URL || 'https://git.projecttick.org/api/v4' }}
-          ci-server-fqdn: ${{ vars.CNG_SERVER_FQDN || 'git.projecttick.org' }}
-          gitaly-git-repo-url: ${{ vars.CNG_GITALY_GIT_REPO_URL || 'https://git.projecttick.org/project-tick/uppfinna/forge/git.git' }}
+          ci-api-v4-url: ${{ vars.CNG_API_V4_URL || 'https://projecttick.org/api/v4' }}
+          ci-server-fqdn: ${{ vars.CNG_SERVER_FQDN || 'projecttick.org' }}
+          gitaly-git-repo-url: ${{ vars.CNG_GITALY_GIT_REPO_URL || 'https://projecttick.org/project-tick/uppfinna/forge/git.git' }}
           assets-image-registry-prefix: ${{ vars.CNG_ASSETS_IMAGE_REGISTRY_PREFIX || 'registry.projecttick.org/project-tick/uppfinna' }}
 
   phase-three-merge:
@@ -342,7 +342,7 @@ jobs:
     steps:
       - uses: Project-Tick-Infrastructure/checkout@v5
         with:
-          source-repository: ${{ inputs.cng-repository != '' && inputs.cng-repository || 'https://git.projecttick.org/project-tick/uppfinna/cng' }}
+          source-repository: ${{ inputs.cng-repository != '' && inputs.cng-repository || 'https://projecttick.org/project-tick/uppfinna/cng' }}
           source-ref: ${{ inputs.cng-ref || 'master' }}
           submodules: true
       - uses: Project-Tick/Project-Tick/.github/actions/uppfinna-cng-image@master
@@ -359,9 +359,9 @@ jobs:
           ci-registry-image: ${{ vars.CNG_REGISTRY_IMAGE || 'registry.projecttick.org/project-tick/uppfinna/cng' }}
           gitlab-namespace: ${{ vars.CNG_GITLAB_NAMESPACE || 'project-tick/uppfinna/forge' }}
           ce-project: ${{ vars.CNG_CE_PROJECT || 'uppfinna-project' }}
-          ci-api-v4-url: ${{ vars.CNG_API_V4_URL || 'https://git.projecttick.org/api/v4' }}
-          ci-server-fqdn: ${{ vars.CNG_SERVER_FQDN || 'git.projecttick.org' }}
-          gitaly-git-repo-url: ${{ vars.CNG_GITALY_GIT_REPO_URL || 'https://git.projecttick.org/project-tick/uppfinna/forge/git.git' }}
+          ci-api-v4-url: ${{ vars.CNG_API_V4_URL || 'https://projecttick.org/api/v4' }}
+          ci-server-fqdn: ${{ vars.CNG_SERVER_FQDN || 'projecttick.org' }}
+          gitaly-git-repo-url: ${{ vars.CNG_GITALY_GIT_REPO_URL || 'https://projecttick.org/project-tick/uppfinna/forge/git.git' }}
           assets-image-registry-prefix: ${{ vars.CNG_ASSETS_IMAGE_REGISTRY_PREFIX || 'registry.projecttick.org/project-tick/uppfinna' }}
 
   ##########################################################################
@@ -381,7 +381,7 @@ jobs:
     steps:
       - uses: Project-Tick-Infrastructure/checkout@v5
         with:
-          source-repository: ${{ inputs.cng-repository != '' && inputs.cng-repository || 'https://git.projecttick.org/project-tick/uppfinna/cng' }}
+          source-repository: ${{ inputs.cng-repository != '' && inputs.cng-repository || 'https://projecttick.org/project-tick/uppfinna/cng' }}
           source-ref: ${{ inputs.cng-ref || 'master' }}
           submodules: true
       - uses: Project-Tick/Project-Tick/.github/actions/uppfinna-cng-image@master
@@ -404,9 +404,9 @@ jobs:
           ci-registry-image: ${{ vars.CNG_REGISTRY_IMAGE || 'registry.projecttick.org/project-tick/uppfinna/cng' }}
           gitlab-namespace: ${{ vars.CNG_GITLAB_NAMESPACE || 'project-tick/uppfinna/forge' }}
           ce-project: ${{ vars.CNG_CE_PROJECT || 'uppfinna-project' }}
-          ci-api-v4-url: ${{ vars.CNG_API_V4_URL || 'https://git.projecttick.org/api/v4' }}
-          ci-server-fqdn: ${{ vars.CNG_SERVER_FQDN || 'git.projecttick.org' }}
-          gitaly-git-repo-url: ${{ vars.CNG_GITALY_GIT_REPO_URL || 'https://git.projecttick.org/project-tick/uppfinna/forge/git.git' }}
+          ci-api-v4-url: ${{ vars.CNG_API_V4_URL || 'https://projecttick.org/api/v4' }}
+          ci-server-fqdn: ${{ vars.CNG_SERVER_FQDN || 'projecttick.org' }}
+          gitaly-git-repo-url: ${{ vars.CNG_GITALY_GIT_REPO_URL || 'https://projecttick.org/project-tick/uppfinna/forge/git.git' }}
           assets-image-registry-prefix: ${{ vars.CNG_ASSETS_IMAGE_REGISTRY_PREFIX || 'registry.projecttick.org/project-tick/uppfinna' }}
 
   phase-four-merge:
@@ -422,7 +422,7 @@ jobs:
     steps:
       - uses: Project-Tick-Infrastructure/checkout@v5
         with:
-          source-repository: ${{ inputs.cng-repository != '' && inputs.cng-repository || 'https://git.projecttick.org/project-tick/uppfinna/cng' }}
+          source-repository: ${{ inputs.cng-repository != '' && inputs.cng-repository || 'https://projecttick.org/project-tick/uppfinna/cng' }}
           source-ref: ${{ inputs.cng-ref || 'master' }}
           submodules: true
       - uses: Project-Tick/Project-Tick/.github/actions/uppfinna-cng-image@master
@@ -443,9 +443,9 @@ jobs:
           ci-registry-image: ${{ vars.CNG_REGISTRY_IMAGE || 'registry.projecttick.org/project-tick/uppfinna/cng' }}
           gitlab-namespace: ${{ vars.CNG_GITLAB_NAMESPACE || 'project-tick/uppfinna/forge' }}
           ce-project: ${{ vars.CNG_CE_PROJECT || 'uppfinna-project' }}
-          ci-api-v4-url: ${{ vars.CNG_API_V4_URL || 'https://git.projecttick.org/api/v4' }}
-          ci-server-fqdn: ${{ vars.CNG_SERVER_FQDN || 'git.projecttick.org' }}
-          gitaly-git-repo-url: ${{ vars.CNG_GITALY_GIT_REPO_URL || 'https://git.projecttick.org/project-tick/uppfinna/forge/git.git' }}
+          ci-api-v4-url: ${{ vars.CNG_API_V4_URL || 'https://projecttick.org/api/v4' }}
+          ci-server-fqdn: ${{ vars.CNG_SERVER_FQDN || 'projecttick.org' }}
+          gitaly-git-repo-url: ${{ vars.CNG_GITALY_GIT_REPO_URL || 'https://projecttick.org/project-tick/uppfinna/forge/git.git' }}
           assets-image-registry-prefix: ${{ vars.CNG_ASSETS_IMAGE_REGISTRY_PREFIX || 'registry.projecttick.org/project-tick/uppfinna' }}
 
   ##########################################################################
@@ -464,7 +464,7 @@ jobs:
     steps:
       - uses: Project-Tick-Infrastructure/checkout@v5
         with:
-          source-repository: ${{ inputs.cng-repository != '' && inputs.cng-repository || 'https://git.projecttick.org/project-tick/uppfinna/cng' }}
+          source-repository: ${{ inputs.cng-repository != '' && inputs.cng-repository || 'https://projecttick.org/project-tick/uppfinna/cng' }}
           source-ref: ${{ inputs.cng-ref || 'master' }}
           submodules: true
       - uses: Project-Tick/Project-Tick/.github/actions/uppfinna-cng-image@master
@@ -482,9 +482,9 @@ jobs:
           ci-registry-image: ${{ vars.CNG_REGISTRY_IMAGE || 'registry.projecttick.org/project-tick/uppfinna/cng' }}
           gitlab-namespace: ${{ vars.CNG_GITLAB_NAMESPACE || 'project-tick/uppfinna/forge' }}
           ce-project: ${{ vars.CNG_CE_PROJECT || 'uppfinna-project' }}
-          ci-api-v4-url: ${{ vars.CNG_API_V4_URL || 'https://git.projecttick.org/api/v4' }}
-          ci-server-fqdn: ${{ vars.CNG_SERVER_FQDN || 'git.projecttick.org' }}
-          gitaly-git-repo-url: ${{ vars.CNG_GITALY_GIT_REPO_URL || 'https://git.projecttick.org/project-tick/uppfinna/forge/git.git' }}
+          ci-api-v4-url: ${{ vars.CNG_API_V4_URL || 'https://projecttick.org/api/v4' }}
+          ci-server-fqdn: ${{ vars.CNG_SERVER_FQDN || 'projecttick.org' }}
+          gitaly-git-repo-url: ${{ vars.CNG_GITALY_GIT_REPO_URL || 'https://projecttick.org/project-tick/uppfinna/forge/git.git' }}
           assets-image-registry-prefix: ${{ vars.CNG_ASSETS_IMAGE_REGISTRY_PREFIX || 'registry.projecttick.org/project-tick/uppfinna' }}
 
   phase-four-post-merge:
@@ -496,7 +496,7 @@ jobs:
     steps:
       - uses: Project-Tick-Infrastructure/checkout@v5
         with:
-          source-repository: ${{ inputs.cng-repository != '' && inputs.cng-repository || 'https://git.projecttick.org/project-tick/uppfinna/cng' }}
+          source-repository: ${{ inputs.cng-repository != '' && inputs.cng-repository || 'https://projecttick.org/project-tick/uppfinna/cng' }}
           source-ref: ${{ inputs.cng-ref || 'master' }}
           submodules: true
       - uses: Project-Tick/Project-Tick/.github/actions/uppfinna-cng-image@master
@@ -513,9 +513,9 @@ jobs:
           ci-registry-image: ${{ vars.CNG_REGISTRY_IMAGE || 'registry.projecttick.org/project-tick/uppfinna/cng' }}
           gitlab-namespace: ${{ vars.CNG_GITLAB_NAMESPACE || 'project-tick/uppfinna/forge' }}
           ce-project: ${{ vars.CNG_CE_PROJECT || 'uppfinna-project' }}
-          ci-api-v4-url: ${{ vars.CNG_API_V4_URL || 'https://git.projecttick.org/api/v4' }}
-          ci-server-fqdn: ${{ vars.CNG_SERVER_FQDN || 'git.projecttick.org' }}
-          gitaly-git-repo-url: ${{ vars.CNG_GITALY_GIT_REPO_URL || 'https://git.projecttick.org/project-tick/uppfinna/forge/git.git' }}
+          ci-api-v4-url: ${{ vars.CNG_API_V4_URL || 'https://projecttick.org/api/v4' }}
+          ci-server-fqdn: ${{ vars.CNG_SERVER_FQDN || 'projecttick.org' }}
+          gitaly-git-repo-url: ${{ vars.CNG_GITALY_GIT_REPO_URL || 'https://projecttick.org/project-tick/uppfinna/forge/git.git' }}
           assets-image-registry-prefix: ${{ vars.CNG_ASSETS_IMAGE_REGISTRY_PREFIX || 'registry.projecttick.org/project-tick/uppfinna' }}
 
   ##########################################################################
@@ -534,7 +534,7 @@ jobs:
     steps:
       - uses: Project-Tick-Infrastructure/checkout@v5
         with:
-          source-repository: ${{ inputs.cng-repository != '' && inputs.cng-repository || 'https://git.projecttick.org/project-tick/uppfinna/cng' }}
+          source-repository: ${{ inputs.cng-repository != '' && inputs.cng-repository || 'https://projecttick.org/project-tick/uppfinna/cng' }}
           source-ref: ${{ inputs.cng-ref || 'master' }}
           submodules: true
       - uses: Project-Tick/Project-Tick/.github/actions/uppfinna-cng-image@master
@@ -552,9 +552,9 @@ jobs:
           ci-registry-image: ${{ vars.CNG_REGISTRY_IMAGE || 'registry.projecttick.org/project-tick/uppfinna/cng' }}
           gitlab-namespace: ${{ vars.CNG_GITLAB_NAMESPACE || 'project-tick/uppfinna/forge' }}
           ce-project: ${{ vars.CNG_CE_PROJECT || 'uppfinna-project' }}
-          ci-api-v4-url: ${{ vars.CNG_API_V4_URL || 'https://git.projecttick.org/api/v4' }}
-          ci-server-fqdn: ${{ vars.CNG_SERVER_FQDN || 'git.projecttick.org' }}
-          gitaly-git-repo-url: ${{ vars.CNG_GITALY_GIT_REPO_URL || 'https://git.projecttick.org/project-tick/uppfinna/forge/git.git' }}
+          ci-api-v4-url: ${{ vars.CNG_API_V4_URL || 'https://projecttick.org/api/v4' }}
+          ci-server-fqdn: ${{ vars.CNG_SERVER_FQDN || 'projecttick.org' }}
+          gitaly-git-repo-url: ${{ vars.CNG_GITALY_GIT_REPO_URL || 'https://projecttick.org/project-tick/uppfinna/forge/git.git' }}
           assets-image-registry-prefix: ${{ vars.CNG_ASSETS_IMAGE_REGISTRY_PREFIX || 'registry.projecttick.org/project-tick/uppfinna' }}
 
   phase-five-merge:
@@ -566,7 +566,7 @@ jobs:
     steps:
       - uses: Project-Tick-Infrastructure/checkout@v5
         with:
-          source-repository: ${{ inputs.cng-repository != '' && inputs.cng-repository || 'https://git.projecttick.org/project-tick/uppfinna/cng' }}
+          source-repository: ${{ inputs.cng-repository != '' && inputs.cng-repository || 'https://projecttick.org/project-tick/uppfinna/cng' }}
           source-ref: ${{ inputs.cng-ref || 'master' }}
           submodules: true
       - uses: Project-Tick/Project-Tick/.github/actions/uppfinna-cng-image@master
@@ -582,9 +582,9 @@ jobs:
           ci-registry-image: ${{ vars.CNG_REGISTRY_IMAGE || 'registry.projecttick.org/project-tick/uppfinna/cng' }}
           gitlab-namespace: ${{ vars.CNG_GITLAB_NAMESPACE || 'project-tick/uppfinna/forge' }}
           ce-project: ${{ vars.CNG_CE_PROJECT || 'uppfinna-project' }}
-          ci-api-v4-url: ${{ vars.CNG_API_V4_URL || 'https://git.projecttick.org/api/v4' }}
-          ci-server-fqdn: ${{ vars.CNG_SERVER_FQDN || 'git.projecttick.org' }}
-          gitaly-git-repo-url: ${{ vars.CNG_GITALY_GIT_REPO_URL || 'https://git.projecttick.org/project-tick/uppfinna/forge/git.git' }}
+          ci-api-v4-url: ${{ vars.CNG_API_V4_URL || 'https://projecttick.org/api/v4' }}
+          ci-server-fqdn: ${{ vars.CNG_SERVER_FQDN || 'projecttick.org' }}
+          gitaly-git-repo-url: ${{ vars.CNG_GITALY_GIT_REPO_URL || 'https://projecttick.org/project-tick/uppfinna/forge/git.git' }}
           assets-image-registry-prefix: ${{ vars.CNG_ASSETS_IMAGE_REGISTRY_PREFIX || 'registry.projecttick.org/project-tick/uppfinna' }}
 
   ##########################################################################
@@ -604,7 +604,7 @@ jobs:
     steps:
       - uses: Project-Tick-Infrastructure/checkout@v5
         with:
-          source-repository: ${{ inputs.cng-repository != '' && inputs.cng-repository || 'https://git.projecttick.org/project-tick/uppfinna/cng' }}
+          source-repository: ${{ inputs.cng-repository != '' && inputs.cng-repository || 'https://projecttick.org/project-tick/uppfinna/cng' }}
           source-ref: ${{ inputs.cng-ref || 'master' }}
           submodules: true
       - uses: Project-Tick/Project-Tick/.github/actions/uppfinna-cng-image@master
@@ -621,9 +621,9 @@ jobs:
           ci-registry-image: ${{ vars.CNG_REGISTRY_IMAGE || 'registry.projecttick.org/project-tick/uppfinna/cng' }}
           gitlab-namespace: ${{ vars.CNG_GITLAB_NAMESPACE || 'project-tick/uppfinna/forge' }}
           ce-project: ${{ vars.CNG_CE_PROJECT || 'uppfinna-project' }}
-          ci-api-v4-url: ${{ vars.CNG_API_V4_URL || 'https://git.projecttick.org/api/v4' }}
-          ci-server-fqdn: ${{ vars.CNG_SERVER_FQDN || 'git.projecttick.org' }}
-          gitaly-git-repo-url: ${{ vars.CNG_GITALY_GIT_REPO_URL || 'https://git.projecttick.org/project-tick/uppfinna/forge/git.git' }}
+          ci-api-v4-url: ${{ vars.CNG_API_V4_URL || 'https://projecttick.org/api/v4' }}
+          ci-server-fqdn: ${{ vars.CNG_SERVER_FQDN || 'projecttick.org' }}
+          gitaly-git-repo-url: ${{ vars.CNG_GITALY_GIT_REPO_URL || 'https://projecttick.org/project-tick/uppfinna/forge/git.git' }}
           assets-image-registry-prefix: ${{ vars.CNG_ASSETS_IMAGE_REGISTRY_PREFIX || 'registry.projecttick.org/project-tick/uppfinna' }}
 
   phase-six-merge:
@@ -639,7 +639,7 @@ jobs:
     steps:
       - uses: Project-Tick-Infrastructure/checkout@v5
         with:
-          source-repository: ${{ inputs.cng-repository != '' && inputs.cng-repository || 'https://git.projecttick.org/project-tick/uppfinna/cng' }}
+          source-repository: ${{ inputs.cng-repository != '' && inputs.cng-repository || 'https://projecttick.org/project-tick/uppfinna/cng' }}
           source-ref: ${{ inputs.cng-ref || 'master' }}
           submodules: true
       - uses: Project-Tick/Project-Tick/.github/actions/uppfinna-cng-image@master
@@ -656,7 +656,7 @@ jobs:
           ci-registry-image: ${{ vars.CNG_REGISTRY_IMAGE || 'registry.projecttick.org/project-tick/uppfinna/cng' }}
           gitlab-namespace: ${{ vars.CNG_GITLAB_NAMESPACE || 'project-tick/uppfinna/forge' }}
           ce-project: ${{ vars.CNG_CE_PROJECT || 'uppfinna-project' }}
-          ci-api-v4-url: ${{ vars.CNG_API_V4_URL || 'https://git.projecttick.org/api/v4' }}
-          ci-server-fqdn: ${{ vars.CNG_SERVER_FQDN || 'git.projecttick.org' }}
-          gitaly-git-repo-url: ${{ vars.CNG_GITALY_GIT_REPO_URL || 'https://git.projecttick.org/project-tick/uppfinna/forge/git.git' }}
+          ci-api-v4-url: ${{ vars.CNG_API_V4_URL || 'https://projecttick.org/api/v4' }}
+          ci-server-fqdn: ${{ vars.CNG_SERVER_FQDN || 'projecttick.org' }}
+          gitaly-git-repo-url: ${{ vars.CNG_GITALY_GIT_REPO_URL || 'https://projecttick.org/project-tick/uppfinna/forge/git.git' }}
           assets-image-registry-prefix: ${{ vars.CNG_ASSETS_IMAGE_REGISTRY_PREFIX || 'registry.projecttick.org/project-tick/uppfinna' }}
